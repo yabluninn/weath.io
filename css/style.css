@@ -1,0 +1,467 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Rubik:wght@400;500;600;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Rubik', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background-color: rgb(64, 38, 88);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 40%;
+    height: 650px;
+    border: 1px solid;
+    border-radius: 25px;
+    margin: 0 auto;
+    background-color: white;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 15px;
+}
+
+.search-bar i {
+    font-size: 50px;
+    color: rgb(115, 68, 158);
+    margin-left: 15px;
+    margin-right: 35px;
+}
+
+.search-bar input {
+    font-size: 25px;
+    background-color: rgb(240, 240, 240);
+    border: 0;
+    padding: 15px;
+    padding-left: 15px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.search-bar input:focus {
+    border: 0;
+    background-color: white;
+}
+
+.search-bar button {
+    padding: 20px;
+    color: white;
+    font-weight: bold;
+    background-color: rgb(115, 68, 158);
+    border: 0;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    font-size: 20px;
+}
+
+.search-bar button:hover {
+    cursor: pointer;
+}
+
+.not-found {
+    border: 1px solid;
+    text-align: center;
+    opacity: 0;
+    display: none;
+}
+
+.not-found img {
+    border: 1px solid;
+    width: 300px;
+    height: 300px;
+}
+
+.not-found p {
+    font-size: 25px;
+}
+
+.weather-box {
+    text-align: center;
+    opacity: 0;
+    display: none;
+}
+
+.weather-box img {
+    border: 1px solid;
+    width: 250px;
+    height: 250px;
+}
+
+.temperature {
+    font-size: 70px;
+    font-weight: bold;
+}
+
+.description {
+    font-size: 30px;
+}
+
+.weather-details {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 70px;
+    opacity: 0;
+    display: none;
+}
+
+.humidity {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: rgb(115, 68, 158);
+    padding: 15px;
+    border-radius: 25px;
+}
+
+.humidity span {
+    font-size: 30px;
+}
+
+.humidity p {
+    font-size: 20px;
+}
+
+.humidity i {
+    font-size: 55px;
+    margin-right: 20px;
+}
+
+.wind {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: rgb(115, 68, 158);
+    padding: 15px;
+    border-radius: 25px;
+}
+
+.wind span {
+    font-size: 30px;
+}
+
+.wind p {
+    font-size: 20px;
+}
+
+.wind i {
+    font-size: 55px;
+    margin-right: 20px;
+} */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Rubik:wght@400;500;600;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(64, 38, 88);
+    font-family: 'Rubik', sans-serif;
+}
+
+.container {
+    position: relative;
+    width: 460px;
+    height: 105px;
+    background: #fff;
+    padding: 28px 32px;
+    overflow: hidden;
+    border-radius: 18px;
+    transition: 0.6s ease-out;
+}
+
+.search-box {
+    width: 100%;
+    height: min-content;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search-box input {
+    color: #06283D;
+    width: 80%;
+    font-size: 24px;
+    font-weight: 500;
+    padding-left: 50px;
+}
+
+.search-box input::placeholder {
+    font-size: 20px;
+    font-weight: 500;
+    color: #06283D;
+}
+
+.search-box-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 130px;
+    margin-left: 15px;
+}
+
+.search-box-buttons button {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    color: white;
+    background: blueviolet;
+    border-radius: 18px;
+    font-size: 23px;
+    transition: 0.4s ease;
+}
+
+.search-box button:hover {
+    color: blueviolet;
+    background-color: white;
+}
+
+.search-box i {
+    position: absolute;
+    color: #06283D;
+    font-size: 28px;
+}
+
+.weather-box {
+    text-align: center;
+}
+
+.weather-box img {
+    width: 60%;
+    margin-top: 30px;
+}
+
+.weather-box .temperature {
+    position: relative;
+    color: #06283D;
+    font-size: 4rem;
+    font-weight: 800;
+    margin-top: 30px;
+    margin-left: -16px;
+}
+
+.weather-box .temperature span {
+    position: absolute;
+    margin-left: 4px;
+    font-size: 1.5rem;
+}
+
+.weather-box .description {
+    color: #06283D;
+    font-size: 22px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.weather-details {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    color: white;
+}
+
+.weather-details .humidity,
+.weather-details .wind {
+    display: flex;
+    align-items: center;
+    width: 48%;
+    height: 100px;
+    color: white;
+    background-color: blueviolet;
+    border-radius: 25px;
+}
+
+.weather-details .humidity {
+    padding-left: 20px;
+    justify-content: flex-start;
+}
+
+.weather-details .wind {
+    padding-right: 40px;
+    justify-content: flex-end;
+}
+
+.weather-details i {
+    color: white;
+    font-size: 26px;
+    margin-right: 10px;
+    margin-top: 6px;
+}
+
+.weather-details span {
+    color: white;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.weather-details p {
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.not-found {
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+    scale: 0;
+    opacity: 0;
+    display: none;
+}
+
+.not-found img {
+    width: 60%;
+}
+
+.not-found p {
+    color: #06283D;
+    font-size: 22px;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.weather-box,
+.weather-details {
+    scale: 0;
+    opacity: 0;
+}
+
+.fadeIn {
+    animation: 0.5s fadeIn forwards;
+    animation-delay: 0.5s;
+}
+
+.country {
+    margin: 0 auto;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    color: white;
+    background-color: blueviolet;
+    border-radius: 25px;
+    width: 50%;
+    margin-top: 15px;
+    scale: 0;
+    opacity: 0;
+    padding: 10px;
+}
+
+.country span {
+    font-size: 25px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.country img {
+    width: 50px;
+    height: 50px;
+    margin-left: 20px;
+}
+
+.saved-locations {
+    position: relative;
+    width: 400px;
+    height: fit-content;
+    background: #fff;
+    overflow: hidden;
+    border-radius: 18px;
+    margin-right: 100px;
+}
+
+.saved-locations-header {
+    border-top-right-radius: 18px;
+    border-top-left-radius: 18px;
+    background-color: blueviolet;
+    color: white;
+    height: 55px;
+    padding: 15px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.saved-locations-header i {
+    font-size: 30px;
+}
+
+.saved-locations-header span {
+    margin-left: 15px;
+    font-size: 25px;
+}
+
+.saved-locations-list {
+    margin: 0 auto;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 96%;
+}
+
+.saved-locations-item {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(236, 224, 249);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+.saved-locations-item i {
+    font-size: 30px;
+    color: black;
+    margin-left: 5px;
+}
+
+.saved-locations-item span {
+    font-size: 28px;
+    font-weight: 500;
+    color: black;
+    margin-left: -170px
+}
+
+.saved-locations-item button {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    color: white;
+    background: blueviolet;
+    border-radius: 18px;
+    font-size: 20px;
+    transition: 0.4s ease;
+    margin-right: 5px;
+}
+
+.saved-locations-item button:hover {
+    color: blueviolet;
+    background-color: rgb(236, 224, 249);
+}
+
+@keyframes fadeIn {
+    to {
+        scale: 1;
+        opacity: 1;
+    }
+}
