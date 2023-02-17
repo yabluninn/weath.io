@@ -76,15 +76,23 @@ function searchWeather() {
         .then(response => response.json())
         .then(json => {
 
+            const saveButton = document.querySelector('#saved-button');
+
             if (json.cod === '404') {
                 container.style.height = '400px';
                 weatherBox.style.display = 'none';
                 weatherDetails.style.display = 'none';
                 error404.style.display = 'block';
                 error404.classList.add('fadeIn');
+                saveButton.disabled = true;
+                saveButton.style.opacity = 0;
+                saveButton.style.scale = 0;
                 return;
             }
 
+            saveButton.style.opacity = 1;
+            saveButton.style.scale = 1;
+            saveButton.disabled = false;
             error404.style.display = 'none';
             error404.classList.remove('fadeIn');
 
@@ -152,8 +160,6 @@ function searchWeather() {
             container.style.height = '705px';
 
             console.log(json.sys.country);
-
-
         });
 
 }
@@ -162,3 +168,51 @@ search.addEventListener('click', searchWeather);
 
 const savedLocationsList = document.querySelector('.saved-locations-list');
 const inputCity = document.querySelector('.search-box input');
+const saveButton = document.querySelector('#saved-button');
+
+saveButton.addEventListener('click', saveLocation);
+
+function saveLocation() {
+    if (inputCity.value === '') return;
+
+    const savedItem = document.createElement('div');
+    savedItem.className = 'saved-locations-item';
+
+    const savedItemFlag = document.createElement('img');
+    const imgFullURL = document.querySelector('.country img').src;
+    savedItemFlag.src = imgFullURL;
+    savedItem.appendChild(savedItemFlag);
+
+    const savedItemNameBlock = document.createElement('div');
+    savedItemNameBlock.className = 'saved-location-name';
+    const savedItemName = document.createElement('span');
+    savedItemName.textContent = inputCity.value;
+    savedItemNameBlock.appendChild(savedItemName);
+    savedItem.appendChild(savedItemNameBlock);
+
+    const searchSavedItem = document.createElement('button');
+    const savedLocationBtns = document.createElement('div');
+    savedLocationBtns.className = 'saved-location-btns';
+    searchSavedItem.className = 'fa-solid fa-magnifying-glass';
+    searchSavedItem.id = 'search-btn';
+    savedLocationBtns.appendChild(searchSavedItem);
+    searchSavedItem.addEventListener('click', (e) => {
+        //savedLocationsList.removeChild(savedItem);
+        inputCity.value = savedItemName.textContent;
+        searchWeather();
+    });
+    const deleteSavedItem = document.createElement('button');
+    deleteSavedItem.className = 'fa-solid fa-trash';
+    deleteSavedItem.id = 'delete-btn';
+    savedLocationBtns.appendChild(deleteSavedItem);
+    deleteSavedItem.addEventListener('click', (e) => {
+        savedLocationsList.removeChild(savedItem);
+        // inputCity.value = savedItemName.textContent;
+        // searchWeather();
+    });
+
+    savedItem.appendChild(savedLocationBtns);
+
+    savedLocationsList.appendChild(savedItem);
+    console.log(inputCity.value);
+}

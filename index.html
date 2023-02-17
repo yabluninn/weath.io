@@ -1,53 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather App</title>
-    <script src="https://kit.fontawesome.com/96842691bc.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/style.css">
-
-</head>
-
-<body>
-    <div class="container">
-        <div class="search-bar">
-            <i class="fa-solid fa-map-location-dot"></i>
-            <input type="text" placeholder="Enter your location" value="">
-            <button class="fa-solid fa-magnifying-glass"></button>
-        </div>
-        <div class="not-found">
-            <img src="img/not-found.png">
-            <p>Oops! Invalid location :( </p>
-        </div>
-        <div class="weather-box">
-            <img src="">
-            <p class="temperature">10</p>
-            <p class="description">Description</p>
-        </div>
-        <div class="weather-details">
-            <div class="humidity">
-                <i class="fa-solid fa-water"></i>
-                <div class="info-box">
-                    <span>88%</span>
-                    <p>Humidity</p>
-                </div>
-            </div>
-            <div class="wind">
-                <i class="fa-solid fa-wind"></i>
-                <div class="info-box">
-                    <span>0 km/h</span>
-                    <p>Wind speed</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="js/script.js"></script>
-</body>
-
-</html> -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,9 +17,14 @@
         </div>
         <div class="saved-locations-list">
             <!-- <div class="saved-locations-item">
-                <i class="fa-solid fa-circle-plus"></i>
-                <span>Miami</span>
-                <button class="fa-solid fa-magnifying-glass"></button>
+                <img src="img/flags/ua-flag.png" alt="">
+                <div class="saved-location-name">
+                    <span>Location name</span>
+                </div>
+                <div class="saved-location-btns">
+                    <button class="fa-solid fa-magnifying-glass" id="search-btn"></button>
+                    <button class="fa-solid fa-trash" id="delete-btn"></button>
+                </div>
             </div> -->
         </div>
     </div>
@@ -79,7 +34,7 @@
             <input type="text" placeholder="Enter your location">
             <div class="search-box-buttons">
                 <button class="fa-solid fa-magnifying-glass"></button>
-                <button class="fa-solid fa-bookmark"></button>
+                <button class="fa-solid fa-bookmark" id="saved-button"></button>
             </div>
         </div>
 
