@@ -2,4 +2,5 @@
 - New web app desing;
 - Added "blank search input" block;
 - Added "not found" block;
+- All images (files .png) are changed to links;
 - Code refactoring;
