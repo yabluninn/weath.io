@@ -8,12 +8,12 @@ const notFoundBlock = document.querySelector('.not-found-block');
 
 function searchWeather() {
     const APIKey = '728b0ee6df5687559812bd3169ad77b7';
-    const city = document.querySelector('.dashboard-search input').value;
+    const tempCity = document.querySelector('.dashboard-search input').value;
 
-    if (city === '')
+    if (tempCity === '')
         return;
 
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIKey}`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${tempCity}&units=metric&appid=${APIKey}`)
         .then(response => response.json())
         .then(json => {
 
@@ -42,16 +42,21 @@ function searchWeather() {
             infoHeader.style.display = 'flex';
             infoHeader.style.opacity = 1;
             infoHeader.style.scale = 1;
-            // saveButton.style.opacity = 1;
-            // saveButton.style.scale = 1;
-            // saveButton.disabled = false;
-            // error404.style.display = 'none';
-            // error404.classList.remove('fadeIn');
+
+            const city = tempCity.charAt(0).toUpperCase() + tempCity.slice(1);
 
             const image = document.querySelector('.weather-block .weather-icon');
             const countryImage = document.querySelector('.info-header img');
             const temperature = document.querySelector('.weather-block .temperature');
             const description = document.querySelector('.weather-block .description');
+
+            const feelsLike = document.querySelector('.feels-like');
+            const minTemperature = document.querySelector('.min-temperature');
+            const maxTemperature = document.querySelector('.max-temperature');
+
+            const humidity = document.querySelector('.humidity');
+            const windSpeed = document.querySelector('.wind-speed');
+            const country = document.querySelector('.country');
 
             switch (json.weather[0].main) {
                 case 'Clear':
@@ -100,17 +105,16 @@ function searchWeather() {
             }
             cityName.innerHTML = city;
             temperature.innerHTML = `${parseInt(json.main.temp)}<span>°C</span>`;
-            description.innerHTML = `${json.weather[0].description}`;
-            // humidity.innerHTML = `${json.main.humidity} %`;
-            // wind.innerHTML = `${parseInt(json.wind.speed)} Km/h`;
-            // countryName.innerHTML = `${json.sys.country}`;
+            feelsLike.innerHTML = `${parseInt(json.main.feels_like)}<span>°C</span>`;
+            minTemperature.innerHTML = `${parseInt(json.main.temp_min)}<span>°C</span>`;
+            maxTemperature.innerHTML = `${parseInt(json.main.temp_max)}<span>°C</span>`;
+            humidity.innerHTML = `${json.main.humidity}<span>%</span>`;
+            windSpeed.innerHTML = `${parseInt(json.wind.speed)}<span>km/h</span>`;
+            country.innerHTML = `${json.sys.country}`;
 
-            // weatherBox.style.display = '';
-            // weatherDetails.style.display = '';
-            // weatherBox.classList.add('fadeIn');
-            // weatherDetails.classList.add('fadeIn');
-            // country.classList.add('fadeIn');
-            // container.style.height = '705px';
+            const newDescription = json.weather[0].description;
+            const changedDescription = newDescription.charAt(0).toUpperCase() + newDescription.slice(1);
+            description.innerHTML = changedDescription;
 
             console.log(json);
             console.log(json.sys.country);
