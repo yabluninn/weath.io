@@ -1,73 +1,14 @@
-// const container = document.querySelector('.container');
-// const search = document.querySelector('.search-bar button');
-// const weatherBox = document.querySelector('.weather-box');
-// const weatherDetails = document.querySelector('.weather-details');
-// const notFound = document.querySelector('.not-found');
-
-// search.addEventListener('click', () => {
-//     const API_KEY = '584ca977c587314c7e2a79863cea8226';
-//     const city = document.querySelector('.search-bar input').value;
-
-//     if (city === '') {
-//         return;
-//     }
-//     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`)
-//         .then(response => response.json())
-//         .then(json => {
-//             if (json.cod === '404') {
-//                 weatherBox.style.display = 'none';
-//                 weatherDetails.style.display = 'none';
-//                 notFound.style.display = 'block';
-//             }
-//             notFound.style.display = 'none';
-
-//             const image = document.querySelector('.weather-box img');
-//             const temperature = document.querySelector('.weather-box .temperature');
-//             const description = document.querySelector('.weather-box .description');
-
-//             const humidity = document.querySelector('.weather-details .humidity .info-box span');
-//             const wind = document.querySelector('.weather-details .wind .info-box span');
-
-//             switch (json.weather[0].main) {
-//                 case 'Clear':
-//                     image.src = 'img/sun.png';
-//                     break;
-//                 case 'Rain':
-//                     image.src = 'img/rain.png';
-//                     break;
-//                 case 'Snow':
-//                     image.src = 'img/snow.png';
-//                     break;
-//                 case 'Clouds':
-//                     image.src = 'img/cloud.png';
-//                     break;
-//                 case 'Extreme':
-//                     image.src = 'img/extreme.png';
-//                     break;
-//                 default:
-//                     image.src = '';
-//                     break;
-//             }
-//             temperature.innerHTML = `${parseInt(json.main.temp)}<span>℃</span>`;
-//             description.innerHTML = `${json.weather[0].description}`;
-//             humidity.innerHTML = `${json.main.humidity}%`;
-//             wind.innerHTML = `${parseInt(json.wind.speed)}Km/h`;
-
-//             weatherBox.style.display = 'block';
-//             weatherDetails.style.display = 'block';
-
-//         });
-// });
-const container = document.querySelector('.container');
-const search = document.querySelector('.search-box button');
-const weatherBox = document.querySelector('.weather-box');
-const weatherDetails = document.querySelector('.weather-details');
-const error404 = document.querySelector('.not-found');
-const country = document.querySelector('.country');
+const search = document.querySelector('.dashboard-search button');
+const weatherBlock = document.querySelector('.weather-block');
+const buttonsBlock = document.querySelector('.buttons-block');
+const infoHeader = document.querySelector('.info-header');
+const cityName = document.querySelector('.city-name');
+const nothingBlock = document.querySelector('.nothing-block');
+const notFoundBlock = document.querySelector('.not-found-block');
 
 function searchWeather() {
     const APIKey = '728b0ee6df5687559812bd3169ad77b7';
-    const city = document.querySelector('.search-box input').value;
+    const city = document.querySelector('.dashboard-search input').value;
 
     if (city === '')
         return;
@@ -76,53 +17,65 @@ function searchWeather() {
         .then(response => response.json())
         .then(json => {
 
-            const saveButton = document.querySelector('#saved-button');
-
             if (json.cod === '404') {
-                container.style.height = '400px';
-                weatherBox.style.display = 'none';
-                weatherDetails.style.display = 'none';
-                error404.style.display = 'block';
-                error404.classList.add('fadeIn');
-                saveButton.disabled = true;
-                saveButton.style.opacity = 0;
-                saveButton.style.scale = 0;
+                notFoundBlock.style.display = 'flex';
+                nothingBlock.style.display = 'none';
+                weatherBlock.style.display = 'none';
+                weatherBlock.style.opacity = 0;
+                weatherBlock.style.scale = 0;
+                buttonsBlock.style.display = 'none';
+                buttonsBlock.style.opacity = 0;
+                buttonsBlock.style.scale = 0;
+                infoHeader.style.display = 'none';
+                infoHeader.style.opacity = 0;
+                infoHeader.style.scale = 0;
                 return;
             }
+            nothingBlock.style.display = 'none';
+            notFoundBlock.style.display = 'none';
+            weatherBlock.style.display = 'flex';
+            weatherBlock.style.opacity = 1;
+            weatherBlock.style.scale = 1;
+            buttonsBlock.style.display = 'flex';
+            buttonsBlock.style.opacity = 1;
+            buttonsBlock.style.scale = 1;
+            infoHeader.style.display = 'flex';
+            infoHeader.style.opacity = 1;
+            infoHeader.style.scale = 1;
+            // saveButton.style.opacity = 1;
+            // saveButton.style.scale = 1;
+            // saveButton.disabled = false;
+            // error404.style.display = 'none';
+            // error404.classList.remove('fadeIn');
 
-            saveButton.style.opacity = 1;
-            saveButton.style.scale = 1;
-            saveButton.disabled = false;
-            error404.style.display = 'none';
-            error404.classList.remove('fadeIn');
-
-            const image = document.querySelector('.weather-box img');
-            const countryImage = document.querySelector('.country img');
-            const countryName = document.querySelector('.country span');
-            const temperature = document.querySelector('.weather-box .temperature');
-            const description = document.querySelector('.weather-box .description');
-            const humidity = document.querySelector('.weather-details .humidity span');
-            const wind = document.querySelector('.weather-details .wind span');
+            const image = document.querySelector('.weather-block .weather-icon');
+            const countryImage = document.querySelector('.info-header img');
+            const temperature = document.querySelector('.weather-block .temperature');
+            const description = document.querySelector('.weather-block .description');
 
             switch (json.weather[0].main) {
                 case 'Clear':
-                    image.src = 'img/sun.png';
+                    image.src = 'https://cdn-icons-png.flaticon.com/512/578/578152.png';
                     break;
 
                 case 'Rain':
-                    image.src = 'img/rain.png';
+                    image.src = 'https://cdn-icons-png.flaticon.com/512/578/578139.png';
                     break;
 
                 case 'Snow':
-                    image.src = 'img/snow.png';
+                    image.src = 'https://cdn-icons-png.flaticon.com/512/578/578148.png';
                     break;
 
                 case 'Clouds':
-                    image.src = 'img/cloud.png';
+                    image.src = 'https://cdn-icons-png.flaticon.com/512/578/578116.png';
                     break;
 
                 case 'Haze':
-                    image.src = 'img/extreme.png';
+                    image.src = 'https://cdn-icons-png.flaticon.com/512/578/578122.png';
+                    break;
+
+                case 'Mist':
+                    image.src = 'https://cdn-icons-png.flaticon.com/512/578/578123.png';
                     break;
 
                 default:
@@ -130,35 +83,36 @@ function searchWeather() {
             }
             switch (json.sys.country) {
                 case 'UA':
-                    countryImage.src = 'img/flags/ua-flag.png';
+                    countryImage.src = 'https://cdn-icons-png.flaticon.com/512/555/555614.png';
                     break;
                 case 'US':
-                    countryImage.src = 'img/flags/us-flag.png';
+                    countryImage.src = 'https://cdn-icons-png.flaticon.com/512/555/555526.png';
                     break;
                 case 'RU':
-                    countryImage.src = 'img/flags/ru-flag.png';
+                    countryImage.src = 'https://cdn-icons-png.flaticon.com/512/555/555451.png';
                     break;
                 case 'PL':
-                    countryImage.src = 'img/flags/pl-flag.png';
+                    countryImage.src = 'https://cdn-icons-png.flaticon.com/512/555/555571.png';
                     break;
-                case 'PL':
-                    countryImage.src = 'img/flags/ca-flag.png';
+                case 'CA':
+                    countryImage.src = 'https://cdn-icons-png.flaticon.com/512/555/555473.png';
                     break;
             }
-
+            cityName.innerHTML = city;
             temperature.innerHTML = `${parseInt(json.main.temp)}<span>°C</span>`;
             description.innerHTML = `${json.weather[0].description}`;
-            humidity.innerHTML = `${json.main.humidity} %`;
-            wind.innerHTML = `${parseInt(json.wind.speed)} Km/h`;
-            countryName.innerHTML = `${json.sys.country}`;
+            // humidity.innerHTML = `${json.main.humidity} %`;
+            // wind.innerHTML = `${parseInt(json.wind.speed)} Km/h`;
+            // countryName.innerHTML = `${json.sys.country}`;
 
-            weatherBox.style.display = '';
-            weatherDetails.style.display = '';
-            weatherBox.classList.add('fadeIn');
-            weatherDetails.classList.add('fadeIn');
-            country.classList.add('fadeIn');
-            container.style.height = '705px';
+            // weatherBox.style.display = '';
+            // weatherDetails.style.display = '';
+            // weatherBox.classList.add('fadeIn');
+            // weatherDetails.classList.add('fadeIn');
+            // country.classList.add('fadeIn');
+            // container.style.height = '705px';
 
+            console.log(json);
             console.log(json.sys.country);
         });
 

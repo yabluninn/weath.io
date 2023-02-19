@@ -6,71 +6,64 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.0/font/bootstrap-icons.css">
     <title>Weather App</title>
 </head>
 
 <body>
-    <div class="saved-locations">
-        <div class="saved-locations-header">
-            <i class="fa-solid fa-bookmark"></i>
-            <span>Saved locations:</span>
+    <div class="nav">
+        <div class="nav-logo">
+            <img src="https://cdn-icons-png.flaticon.com/512/648/648198.png" alt="" class="logo">
+            <p>Weather</p>
         </div>
-        <div class="saved-locations-list">
-            <!-- <div class="saved-locations-item">
-                <img src="img/flags/ua-flag.png" alt="">
-                <div class="saved-location-name">
-                    <span>Location name</span>
-                </div>
-                <div class="saved-location-btns">
-                    <button class="fa-solid fa-magnifying-glass" id="search-btn"></button>
-                    <button class="fa-solid fa-trash" id="delete-btn"></button>
-                </div>
-            </div> -->
+        <div class="nav-menu">
+            <a href=""><i class="bi bi-house"></i>&nbsp;&nbsp;Dashboard</a>
+            <a href=""><i class="bi bi-bookmark"></i>&nbsp;&nbsp;Saved locations</a>
+            <a href=""><i class="bi bi-gear"></i>&nbsp;&nbsp;Settings</a>
+            <a href=""><i class="bi bi-box-arrow-left"></i>&nbsp;&nbsp;Log out</a>
         </div>
     </div>
-    <div class="container">
-        <div class="search-box">
-            <i class="fa-solid fa-map-location-dot"></i>
-            <input type="text" placeholder="Enter your location">
-            <div class="search-box-buttons">
-                <button class="fa-solid fa-magnifying-glass"></button>
-                <button class="fa-solid fa-bookmark" id="saved-button"></button>
-            </div>
-        </div>
-
-        <div class="not-found">
-            <img src="img/not-found.png">
-            <p>Oops! Invalid location :(</p>
-        </div>
-
-        <div class="weather-box">
-            <img src="">
-            <p class="temperature"></p>
-            <p class="description"></p>
-        </div>
-
-        <div class="weather-details">
-            <div class="humidity">
-                <i class="fa-solid fa-water"></i>
-                <div class="text">
-                    <span></span>
-                    <p>Humidity</p>
+    <div class="main-block">
+        <div class="dashboard">
+            <div class="dashboard-header">
+                <div class="dashboard-date">
+                    <p class="month">February 2023</p>
+                    <p class="full-date">Sunday, Feb 19, 2023</p>
                 </div>
-            </div>
-            <div class="wind">
-                <i class="fa-solid fa-wind"></i>
-                <div class="text">
-                    <span></span>
-                    <p>Wind Speed</p>
+                <div class="dashboard-search">
+                    <input type="text" class="search-input" placeholder="Search location here">
+                    <button class="bi bi-search"></button>
                 </div>
             </div>
         </div>
-        <div class="country">
-            <img src="">
-            <span>UA</span>
-        </div>
-
     </div>
+    <div class="info">
+        <div class="nothing-block">
+            <p>Search weather in your location</p>
+            <img src="https://cdn-icons-png.flaticon.com/512/4652/4652346.png" alt="">
+        </div>
+        <div class="not-found-block">
+            <p>Entered location not found! :(</p>
+            <img src="https://cdn-icons-png.flaticon.com/512/5108/5108591.png" alt="">
+        </div>
+        <div class="info-header">
+            <i class="bi bi-geo-alt"></i>
+            <p class="city-name">Kiev</p>
+            <img src="" alt="">
+        </div>
+        <div class="weather-block">
+            <img src="" alt="" class="weather-icon">
+            <img src="https://cdn-icons-png.flaticon.com/512/578/578156.png" alt="" class="termomether-icon">
+            <p class="temperature">00</p>
+            <p class="description">none</p>
+        </div>
+        <div class="buttons-block">
+            <button title="Reload"><i class="bi bi-arrow-clockwise"></i></button>
+            <button title="Save location"><i class="bi bi-bookmark-plus"></i></button>
+            <button title="Share location"><i class="bi bi-share"></i></button>
+        </div>
+    </div>
+
     <script src="https://kit.fontawesome.com/7c8801c017.js" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
 </body>
