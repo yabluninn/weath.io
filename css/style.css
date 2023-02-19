@@ -50,12 +50,13 @@ body {
 
 .nav-menu {
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
     align-items: start;
     flex-direction: column;
     width: 100%;
-    height: fit-content;
+    height: 80%;
     margin-top: 50px;
+    border: 1px solid;
 }
 
 .nav-menu a {
@@ -85,10 +86,15 @@ body {
     transform: scale(0.8);
 }
 
-.nav-menu a:nth-child(4) {
+.nav-menu a {
     color: rgb(255, 0, 0);
     font-weight: 500;
-    margin-top: 280px;
+    bottom: 0;
+    margin-bottom: 20px;
+}
+
+.nav-menu-subblock a {
+    color: white;
 }
 
 .nav-menu a i {
