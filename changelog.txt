@@ -1,0 +1,5 @@
+19.02.2023:
+- New web app desing;
+- Added "blank search input" block;
+- Added "not found" block;
+- Code refactoring;
