@@ -6,105 +6,111 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.0/font/bootstrap-icons.css">
-    <title>Weather App</title>
+    <link rel="stylesheet" href="https://kit.fontawesome.com/96842691bc.css" crossorigin="anonymous">
+    <title>Weath.io</title>
 </head>
 
 <body>
-    <div class="nav">
-        <div class="nav-logo">
-            <img src="https://cdn-icons-png.flaticon.com/512/648/648198.png" alt="" class="logo">
-            <p>Weather</p>
+    <aside class="main-info">
+        <div class="input-block">
+            <input type="text" placeholder="Search for places..." class="search-input">
+            <button class="search"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button class="clear-search"><i class="fa-solid fa-circle-xmark"></i></button>
         </div>
-        <div class="nav-menu">
-            <div class="nav-menu-subblock">
-                <a href=""><i class="bi bi-house"></i>&nbsp;&nbsp;Dashboard</a>
-                <a href=""><i class="bi bi-bookmark"></i>&nbsp;&nbsp;Saved locations</a>
-                <a href=""><i class="bi bi-gear"></i>&nbsp;&nbsp;Settings</a>
+        <div class="weather-mi">
+            <img src="https://cdn-icons-png.flaticon.com/512/4064/4064276.png" alt="">
+            <p class="temperature dashboard-container-item-p">15<span>°C</span></p>
+            <p class="current-day">Tuesday,<span class="current-time"> 13:00</span></p>
+            <div class="weather-mi-description">
+                <p class="description"><i class="fa-solid fa-cloud"></i>&nbsp;&nbsp;&nbsp;&nbsp;Clouds</p>
+                <p class="rain-chance"><i class="fa-solid fa-umbrella"></i>&nbsp;&nbsp;&nbsp;&nbsp;Rain - 30%</p>
             </div>
-            <a href=""><i class="bi bi-box-arrow-left"></i>&nbsp;&nbsp;Log out</a>
-        </div>
-    </div>
-    <div class="main-block">
-        <div class="dashboard">
-            <div class="dashboard-header">
-                <div class="dashboard-date">
-                    <p class="month">February 2023</p>
-                    <p class="full-date">Sunday, Feb 19, 2023</p>
-                </div>
-                <div class="dashboard-search">
-                    <input type="text" class="search-input" placeholder="Search location here">
-                    <button class="bi bi-search"></button>
-                </div>
-            </div>
-            <div class="dashboard-container">
-                <p class="label"><i class="bi bi-thermometer-sun"></i>Temperature</p>
-                <div class="dashboard-container-block">
-                    <div class="dashboard-container-item">
-                        <p class="dashboard-container-item-header">Feels like:</p>
-                        <p class="feels-like dashboard-container-item-p">-<span>°C</span></p>
-                        <i class="bi bi-eye"></i>
-                    </div>
-                    <div class="dashboard-container-item">
-                        <p class="dashboard-container-item-header">Min °C:</p>
-                        <p class="min-temperature dashboard-container-item-p">-<span>°C</span></p>
-                        <i class="bi bi-thermometer"></i>
-                    </div>
-                    <div class="dashboard-container-item">
-                        <p class="dashboard-container-item-header">Max °C:</p>
-                        <p class="max-temperature dashboard-container-item-p">-<span>°C</span></p>
-                        <i class="bi bi-thermometer-high"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="dashboard-container">
-                <p class="label"><i class="bi bi-card-text"></i>Description</p>
-                <div class="dashboard-container-block">
-                    <div class="dashboard-container-item">
-                        <p class="dashboard-container-item-header">Humidity:</p>
-                        <p class="humidity dashboard-container-item-p">-<span>%</span></p>
-                        <i class="bi bi-water"></i>
-                    </div>
-                    <div class="dashboard-container-item">
-                        <p class="dashboard-container-item-header">Wind speed:</p>
-                        <p class="wind-speed dashboard-container-item-p">-<span>km/h</span></p>
-                        <i class="bi bi-wind"></i>
-                    </div>
-                    <div class="dashboard-container-item">
-                        <p class="dashboard-container-item-header">Country:</p>
-                        <p class="country dashboard-container-item-p">-</p>
-                        <i class="bi bi-map"></i>
-                    </div>
-                </div>
+            <div class="weather-mi-location">
+                <i class="fa-solid fa-location-dot"></i>
+                <p class="location-name">Kiev</p>
             </div>
         </div>
-    </div>
-    <div class="info">
-        <div class="nothing-block">
-            <p>Search weather in your location</p>
-            <img src="https://cdn-icons-png.flaticon.com/512/4652/4652346.png" alt="">
+        <div class="error-block" id="notfound">
+            <p>Weather at the current location not found! <br> Try again</p>
+            <img src="https://cdn-icons-png.flaticon.com/512/1895/1895100.png" alt="">
         </div>
-        <div class="not-found-block">
-            <p>Entered location not found! :(</p>
-            <img src="https://cdn-icons-png.flaticon.com/512/5108/5108591.png" alt="">
+        <div class="error-block" id="nothing">
+            <p>Search weather at need location and get latest data about it!</p>
+            <img src="https://cdn-icons-png.flaticon.com/512/2443/2443789.png" alt="">
         </div>
-        <div class="info-header">
-            <i class="bi bi-geo-alt"></i>
-            <p class="city-name">Kiev</p>
-            <img src="" alt="">
+    </aside>
+    <section class="other-info">
+        <div class="header">
+            <div class="today-block">
+                <p class="today-text">Today</p>
+                <p class="today-date">(February, 21)</p>
+            </div>
+            <div class="temperature-type-block">
+                <button class="temperature-type-btn" id="current-temp-type">°C</button>
+                <button class="temperature-type-btn">°F</button>
+            </div>
+            <div class="logo-block">
+                <p>Weath.io</p>
+                <img src="https://cdn-icons-png.flaticon.com/512/9231/9231625.png" alt="">
+            </div>
         </div>
-        <div class="weather-block">
-            <img src="" alt="" class="weather-icon">
-            <img src="https://cdn-icons-png.flaticon.com/512/578/578156.png" alt="" class="termomether-icon">
-            <p class="temperature">00</p>
-            <p class="description">none</p>
+        <div class="saved-locations-block">
+            <p class="subtitle"><i class="fa-solid fa-bookmark"></i>&nbsp;&nbsp;&nbsp;Saved Locations</p>
+            <div class="saved-locations-items">
+                <div class="saved-locations-item" id="saved-location-none">
+                    <p class="saved-locations-name">None</p>
+                    <img src="https://cdn-icons-png.flaticon.com/512/992/992651.png" alt="Flag">
+                    <button class="saved-location-search" style="display: none"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+                <!-- <div class="saved-locations-item">
+                    <p class="saved-locations-name">Kiev</p>
+                    <img src="https://cdn-icons-png.flaticon.com/512/299/299803.png" alt="Flag">
+                    <button class="saved-location-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div> -->
+            </div>
         </div>
-        <div class="buttons-block">
-            <button title="Reload"><i class="bi bi-arrow-clockwise"></i></button>
-            <button title="Save location"><i class="bi bi-bookmark-plus"></i></button>
-            <button title="Share location"><i class="bi bi-share"></i></button>
+        <div class="weather-highlights-block">
+            <p class="subtitle"><i class="fa-solid fa-house"></i>&nbsp;&nbsp;&nbsp;Today's Highlights</p>
+            <div class="highlights-items">
+                <div class="highlights-item">
+                    <p class="highlights-item-title">Humidity</p>
+                    <p class="highlights-item-text" id="humidity">- <span>%</span></p>
+                    <p class="status">High&nbsp;</p>
+                    <i class="fa-solid fa-water"></i>
+                </div>
+                <div class="highlights-item">
+                    <p class="highlights-item-title">Wind Speed</p>
+                    <p class="highlights-item-text" id="windspeed">- <span>km/h</span></p>
+                    <p class="status">High&nbsp;</p>
+                    <i class="fa-solid fa-wind"></i>
+                </div>
+                <div class="highlights-item">
+                    <p class="highlights-item-title">Visibility</p>
+                    <p class="highlights-item-text" id="visibility">- <span>km</span></p>
+                    <p class="status">Good&nbsp;</p>
+                    <i class="fa-solid fa-eye"></i>
+                </div>
+                <div class="highlights-item">
+                    <p class="highlights-item-title">Cloudiness</p>
+                    <p class="highlights-item-text" id="cloudiness">- <span>%</span></p>
+                    <p class="status">Good&nbsp;</p>
+                    <i class="fa-solid fa-cloud"></i>
+                </div>
+                <div class="highlights-item">
+                    <p class="highlights-item-title">Air Quality</p>
+                    <p class="highlights-item-text">-</p>
+                    <p class="status">Moderate&nbsp;</p>
+                    <i class="fa-solid fa-smog"></i>
+                </div>
+                <div class="highlights-item">
+                    <p class="highlights-item-title">Pressure</p>
+                    <p class="highlights-item-text" id="pressure">- <span>hPa</span></p>
+                    <p class="status">Good&nbsp;</p>
+                    <i class="fa-solid fa-weight-hanging"></i>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
     <script src="https://kit.fontawesome.com/7c8801c017.js" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
