@@ -10,8 +10,8 @@ Coding:
 - HTML / CSS;
 - Javascript;
 - OpenWeather API;
+- Flags API;
 
 UI/UX:
 =======================================================================================================================================================================
-- Bootstrap icons;
-- Flaticon icons;
+- Fontawesome icons;
