@@ -16,5 +16,23 @@ and pressure;
 - Code refactoring;
 - Added "Celsium" and "Fahrenheit" buttons (To switch between these 
 temperature types, now non functional);
-- Disable selection to all images and practically all texts;
+- Disabled selection to all images and practically all texts;
 - Removed country flag icons from "weather main" block;
+
+[22.02.2023]:
+- Fixed "description" info displaying;
+- Added functionality to "clear search input" button;
+- Added date and time blocks to web app;
+
+[23.02.2023]:
+- Added country flag icon to "weather main" block;
+- Added "save location" button;
+- Added scaling animations to all buttons;
+- Added "time" and "day of the week" info to "weather main" block;
+- Added "saved locations count" text;
+- Added Great Britain (GB) and France (FR) flags;
+- Added "delete saved location" button;
+
+[24.02.2023]:
+- Removed all flags images from project;
+- Integrated "FlagsAPI" api to get any country flag from 2-alpha country code;

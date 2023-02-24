@@ -29,6 +29,10 @@
                 <i class="fa-solid fa-location-dot"></i>
                 <p class="location-name">Kiev</p>
             </div>
+            <div class="weather-mi-footer">
+                <img src="https://cdn-icons-png.flaticon.com/512/330/330459.png" alt="">
+                <button class="save-button"><i class="fa-regular fa-bookmark"></i>Save</button>
+            </div>
         </div>
         <div class="error-block" id="notfound">
             <p>Weather at the current location not found! <br> Try again</p>
@@ -43,7 +47,7 @@
         <div class="header">
             <div class="today-block">
                 <p class="today-text">Today</p>
-                <p class="today-date">(February, 21)</p>
+                <p class="today-date">(F, 21)</p>
             </div>
             <div class="temperature-type-block">
                 <button class="temperature-type-btn" id="current-temp-type">°C</button>
@@ -55,7 +59,7 @@
             </div>
         </div>
         <div class="saved-locations-block">
-            <p class="subtitle"><i class="fa-solid fa-bookmark"></i>&nbsp;&nbsp;&nbsp;Saved Locations</p>
+            <p class="subtitle" id="saved-locations-title"><i class="fa-solid fa-bookmark"></i>&nbsp;&nbsp;&nbsp;Saved Locations <span>(Count: 0 / 6)</span></p>
             <div class="saved-locations-items">
                 <div class="saved-locations-item" id="saved-location-none">
                     <p class="saved-locations-name">None</p>
@@ -65,7 +69,10 @@
                 <!-- <div class="saved-locations-item">
                     <p class="saved-locations-name">Kiev</p>
                     <img src="https://cdn-icons-png.flaticon.com/512/299/299803.png" alt="Flag">
-                    <button class="saved-location-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <div class="saved-locations-buttons">
+                        <button class="saved-location-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <button class="saved-location-delete"><i class="fa-solid fa-trash"></i></button>
+                    </div>
                 </div> -->
             </div>
         </div>

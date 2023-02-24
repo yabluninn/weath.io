@@ -59,6 +59,7 @@ body {
     height: 40px;
     margin-left: 10px;
     background-color: white;
+    transition: transform 0.5s;
 }
 
 .input-block button:hover {
@@ -73,6 +74,7 @@ body {
 
 button:hover {
     cursor: pointer;
+    transform: scale(0.8);
 }
 
 .input-block i {
@@ -88,43 +90,43 @@ button:hover {
 }
 
 .weather-mi img {
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
 }
 
 .temperature {
     color: black;
     font-weight: normal;
-    font-size: 85px;
+    font-size: 75px;
     margin-top: 15px;
 }
 
 .temperature span {
     font-weight: normal;
     position: absolute;
-    font-size: 35px;
+    font-size: 25px;
 }
 
 .current-day {
-    font-size: 23px;
+    font-size: 20px;
     font-weight: bold;
     margin-top: 5px;
     border-bottom: 2px solid rgb(225, 225, 225);
     padding-left: 85px;
     padding-right: 85px;
     padding-bottom: 30px;
+    width: 100%;
 }
 
 .current-day span {
     font-weight: normal;
-    font-size: 18px;
+    font-size: 17px;
 }
 
 .description {
     margin-top: 25px;
     font-size: 22px;
-    padding-left: 85px;
-    padding-right: 85px;
+    text-align: center;
 }
 
 .description i {
@@ -132,12 +134,10 @@ button:hover {
 }
 
 .rain-chance {
-    margin-top: 20px;
+    margin-top: 10px;
     font-size: 22px;
-    padding-left: 85px;
-    padding-right: 85px;
-    border-bottom: 2px solid rgb(225, 225, 225);
-    padding-bottom: 25px;
+    padding-bottom: 10px;
+    text-align: center;
 }
 
 .rain-chance i {
@@ -149,6 +149,13 @@ button:hover {
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+    width: 100%;
+    border-top: 2px solid rgb(225, 225, 225);
+    border-bottom: 2px solid rgb(225, 225, 225);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 85px;
+    padding-right: 85px;
 }
 
 .weather-mi-location i {
@@ -159,6 +166,33 @@ button:hover {
 .weather-mi-location p {
     font-size: 25px;
     margin-left: 5px;
+}
+
+.weather-mi-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-top: 20px;
+    width: 100%;
+}
+
+.weather-mi-footer img {
+    width: 70px;
+    height: 70px;
+}
+
+.weather-mi-footer button {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 160px;
+    height: 60px;
+    background-color: black;
+    color: white;
+    font-size: 30px;
+    border-radius: 18px;
+    transition: transform 0.5s;
 }
 
 .other-info {
@@ -209,7 +243,7 @@ button:hover {
     flex-direction: row;
     width: 150px;
     height: 80px;
-    margin-left: 400px;
+    margin-left: 440px;
 }
 
 .temperature-type-block button {
@@ -220,6 +254,7 @@ button:hover {
     height: 50px;
     font-size: 20px;
     font-weight: bold;
+    transition: transform 0.5s;
 }
 
 #current-temp-type {
@@ -236,8 +271,8 @@ button:hover {
     height: 80px;
     background-color: white;
     border-radius: 18px;
-    margin-left: 10px;
-    margin-right: 30px;
+    margin-left: 0px;
+    margin-right: 20px;
     user-select: none;
 }
 
@@ -259,6 +294,12 @@ button:hover {
     flex-direction: column;
     justify-content: center;
     align-items: start;
+}
+
+#saved-locations-title span {
+    font-size: 18px;
+    color: #555555;
+    margin-left: 10px;
 }
 
 .subtitle {
@@ -301,13 +342,20 @@ button:hover {
     text-align: center;
 }
 
+.saved-locations-buttons {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .saved-locations-item button {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     border-radius: 18px;
     color: white;
     background-color: black;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .weather-highlights-block {
@@ -343,7 +391,7 @@ button:hover {
     padding-left: 40px;
     padding-bottom: 20px;
     width: 330px;
-    height: 200px;
+    height: 180px;
     border-radius: 18px;
 }
 
