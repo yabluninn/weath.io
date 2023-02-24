@@ -13,6 +13,8 @@ const visibility = document.querySelector("#visibility");
 const cloudiness = document.querySelector("#cloudiness");
 const pressure = document.querySelector("#pressure");
 
+let savedArr = [];
+
 const todayDate = document.querySelector(".today-date");
 const d1 = new Date();
 const month = d1.getMonth();
@@ -43,6 +45,14 @@ function checkTime(num) {
         num = "0" + num;
     }
     return num;
+}
+
+function removeItemByValue(arr, value) {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === value) {
+            arr.splice(i, 1);
+        }
+    }
 }
 
 function searchWeather() {
@@ -173,60 +183,65 @@ function saveLocation() {
         const noneSavedItem = document.querySelector("#saved-location-none");
         noneSavedItem.style.display = "none";
     }
+    const tempCity = searchInput.value;
+    const city = tempCity.charAt(0).toUpperCase() + tempCity.slice(1);
     if (savedLocationsCount < 6) {
-        const savedLocationsList = document.querySelector(".saved-locations-items");
-        console.log("WORKIGN");
-        const tempCity = searchInput.value;
-        const city = tempCity.charAt(0).toUpperCase() + tempCity.slice(1);
+        if (savedArr.includes(`${city}`) === false) {
+            const savedLocationsList = document.querySelector(".saved-locations-items");
 
-        const savedItem = document.createElement("div");
-        savedItem.className = "saved-locations-item";
+            const savedItem = document.createElement("div");
+            savedItem.className = "saved-locations-item";
 
-        const savedItemName = document.createElement("p");
-        savedItemName.className = "saved-locations-name";
-        savedItemName.textContent = city;
-        savedItem.appendChild(savedItemName);
+            const savedItemName = document.createElement("p");
+            savedItemName.className = "saved-locations-name";
+            savedItemName.textContent = city;
+            savedItem.appendChild(savedItemName);
 
-        const savedItemFlag = document.createElement("img");
-        const imgFullURL = document.querySelector(".weather-mi-footer img").src;
-        savedItemFlag.src = imgFullURL;
-        savedItem.appendChild(savedItemFlag);
+            const savedItemFlag = document.createElement("img");
+            const imgFullURL = document.querySelector(".weather-mi-footer img").src;
+            savedItemFlag.src = imgFullURL;
+            savedItem.appendChild(savedItemFlag);
 
-        const savedLocationButtons = document.createElement("div");
-        savedLocationButtons.className = "saved-locations-buttons";
-        savedItem.appendChild(savedLocationButtons);
+            const savedLocationButtons = document.createElement("div");
+            savedLocationButtons.className = "saved-locations-buttons";
+            savedItem.appendChild(savedLocationButtons);
 
-        const searchSavedItem = document.createElement("button");
-        searchSavedItem.className = "saved-location-search";
-        const searchIcon = document.createElement("i");
-        searchIcon.className = "fa-solid fa-magnifying-glass";
-        searchSavedItem.appendChild(searchIcon);
-        searchSavedItem.addEventListener("click", (e) => {
-            searchInput.value = savedItemName.textContent;
-            searchWeather();
-        });
-        savedLocationButtons.appendChild(searchSavedItem);
+            const searchSavedItem = document.createElement("button");
+            searchSavedItem.className = "saved-location-search";
+            const searchIcon = document.createElement("i");
+            searchIcon.className = "fa-solid fa-magnifying-glass";
+            searchSavedItem.appendChild(searchIcon);
+            searchSavedItem.addEventListener("click", (e) => {
+                searchInput.value = savedItemName.textContent;
+                searchWeather();
+            });
+            savedLocationButtons.appendChild(searchSavedItem);
 
-        const deleteSavedItemButton = document.createElement("button");
-        deleteSavedItemButton.className = "saved-location-delete";
-        const deleteIcon = document.createElement("i");
-        deleteIcon.className = "fa-solid fa-trash";
-        deleteSavedItemButton.appendChild(deleteIcon);
-        deleteSavedItemButton.addEventListener("click", (e) => {
-            savedLocationsList.removeChild(savedItem);
-            savedLocationsCount -= 1;
+            const deleteSavedItemButton = document.createElement("button");
+            deleteSavedItemButton.className = "saved-location-delete";
+            const deleteIcon = document.createElement("i");
+            deleteIcon.className = "fa-solid fa-trash";
+            deleteSavedItemButton.appendChild(deleteIcon);
+            deleteSavedItemButton.addEventListener("click", (e) => {
+                savedLocationsList.removeChild(savedItem);
+                savedLocationsCount -= 1;
+                updateSavedLocationsCount();
+                if (savedLocationsCount === 0) {
+                    const noneSavedItem = document.querySelector("#saved-location-none");
+                    noneSavedItem.style.display = "flex";
+                }
+                removeItemByValue(savedArr, `${city}`);
+            });
+            savedLocationButtons.appendChild(deleteSavedItemButton);
+
+            savedLocationsList.appendChild(savedItem);
+
+            savedLocationsCount += 1;
             updateSavedLocationsCount();
-            if (savedLocationsCount === 0) {
-                const noneSavedItem = document.querySelector("#saved-location-none");
-                noneSavedItem.style.display = "flex";
-            }
-        });
-        savedLocationButtons.appendChild(deleteSavedItemButton);
 
-        savedLocationsList.appendChild(savedItem);
-
-        savedLocationsCount += 1;
-        updateSavedLocationsCount();
+            savedArr.push(`${city}`);
+            console.log(savedArr);
+        }
     }
 }
 

@@ -36,3 +36,5 @@ temperature types, now non functional);
 [24.02.2023]:
 - Removed all flags images from project;
 - Integrated "FlagsAPI" api to get any country flag from 2-alpha country code;
+- A check for an identical location in the list "Saved locations" was added 
+to exclude the possibility of duplication of these values;
