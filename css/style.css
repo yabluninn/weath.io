@@ -234,6 +234,7 @@ button:hover {
     font-size: 20px;
     margin-left: 25px;
     color: #555555;
+    width: max-content;
 }
 
 .temperature-type-block {
@@ -272,7 +273,7 @@ button:hover {
     background-color: white;
     border-radius: 18px;
     margin-left: 0px;
-    margin-right: 20px;
+    margin-right: 50px;
     user-select: none;
 }
 
@@ -327,7 +328,18 @@ button:hover {
     height: 130px;
     background-color: white;
     border-radius: 18px;
+    border: 0;
     margin-left: 20px;
+    transition: all 0.5s;
+}
+
+.saved-locations-item:hover {
+    transform: scale(0.9);
+    border: 2px solid black;
+}
+
+#saved-location-none i {
+    font-size: 40px;
 }
 
 .saved-locations-item img {
@@ -393,6 +405,13 @@ button:hover {
     width: 330px;
     height: 180px;
     border-radius: 18px;
+    border: 0;
+    transition: all 0.5s;
+}
+
+.highlights-item:hover {
+    transform: scale(0.9);
+    border: 2px solid black;
 }
 
 .highlights-item-title {

@@ -13,32 +13,18 @@ const visibility = document.querySelector("#visibility");
 const cloudiness = document.querySelector("#cloudiness");
 const pressure = document.querySelector("#pressure");
 
-let savedArr = [];
-
-const todayDate = document.querySelector(".today-date");
-const d1 = new Date();
-const month = d1.getMonth();
-const day = d1.getDate();
-let stringMonth = "";
-switch (month) {
-    case 0:
-        stringMonth = "January";
-        break;
-    case 1:
-        stringMonth = "February";
-        break;
-    case 2:
-        stringMonth = "March";
-        break;
-    case 3:
-        stringMonth = "April";
-        break;
-    case 4:
-        stringMonth = "May";
-        break;
+let defaultTemperatureType = 'C';
+let user = {
+    savedLocations: [],
+    temperatureType: ''
 }
 
-todayDate.innerHTML = "(" + stringMonth + ", " + day + ")";
+const todayDate = document.querySelector(".today-date");
+todayDate.innerHTML = "(" + moment().format('LL') + ")";
+
+const temperatureTypeButtons = document.querySelector('.temperature-type-block');
+const celsiumButton = temperatureTypeButtons.firstElementChild;
+const fahrenheitButton = temperatureTypeButtons.lastElementChild;
 
 function checkTime(num) {
     if (num < 10) {
@@ -58,6 +44,9 @@ function removeItemByValue(arr, value) {
 function searchWeather() {
     const APIKey = "584ca977c587314c7e2a79863cea8226";
     const tempCity = searchInput.value;
+
+    const city = S(tempCity).capitalize().s;
+    // const city = tempCity.charAt(0).toUpperCase() + tempCity.slice(1);
 
     if (tempCity === "") return;
 
@@ -80,8 +69,6 @@ function searchWeather() {
             weatherBlock.style.opacity = 1;
             weatherBlock.style.scale = 1;
 
-            const city = tempCity.charAt(0).toUpperCase() + tempCity.slice(1);
-
             const image = document.querySelector(".weather-mi img");
             const countryImage = document.querySelector(".weather-mi-footer img");
 
@@ -89,7 +76,6 @@ function searchWeather() {
                 return false;
             };
 
-            const temperature = document.querySelector(".temperature");
             const description = document.querySelector(".description");
 
             switch (json.weather[0].main) {
@@ -125,7 +111,17 @@ function searchWeather() {
             countryImage.src = countryFlagURL;
 
             cityName.innerHTML = city;
-            temperature.innerHTML = `${parseInt(json.main.temp)}<span>°C</span>`;
+
+            celsiumButton.addEventListener("click", function() { changeTemperatureType('C', json.main.temp) });
+            fahrenheitButton.addEventListener("click", function() { changeTemperatureType('F', json.main.temp) });
+            if (user.temperatureType === 'C') {
+                changeTemperatureType('C', json.main.temp);
+            } else if (user.temperatureType === 'F') {
+                changeTemperatureType('F', json.main.temp);
+            } else if (user.temperatureType === '') {
+                changeTemperatureType(defaultTemperatureType, json.main.temp);
+            }
+
             humidity.innerHTML = `${json.main.humidity}<span> %</span>`;
             windSpeed.innerHTML = `${parseInt(json.wind.speed)}<span> km/h</span>`;
             let visibilityValue = json.visibility / 1000;
@@ -134,24 +130,15 @@ function searchWeather() {
             pressure.innerHTML = `${json.main.pressure}<span> hPa</span>`;
 
             const d1 = new Date();
-            const day = d1.getDay();
-            const days = [
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Friday",
-                "Saturday",
-                "Sunday",
-            ];
 
             let hours = d1.getHours();
             let mins = d1.getMinutes();
             hours = checkTime(hours);
             mins = checkTime(mins);
             const currentDay = document.querySelector(".current-day");
+
             currentDay.innerHTML =
-                days[day - 1] + ", " + `<span> ${hours}:${mins}</span>`;
+                moment().format('dddd') + ", " + `<span> ${moment().format('LT')}</span>`;
 
             const newDescription = json.weather[0].description;
             const changedDescription =
@@ -174,19 +161,17 @@ saveButton.addEventListener("click", (e) => {
 
 const savedLocationsList = document.querySelector(".saved-locations-list");
 
-let savedLocationsCount = 0;
-
 function saveLocation() {
     if (searchInput.value === "") return;
 
-    if (savedLocationsCount === 0) {
+    if (user.savedLocations.length === 0) {
         const noneSavedItem = document.querySelector("#saved-location-none");
         noneSavedItem.style.display = "none";
     }
-    const tempCity = searchInput.value;
+    const tempCity = cityName.textContent;
     const city = tempCity.charAt(0).toUpperCase() + tempCity.slice(1);
-    if (savedLocationsCount < 6) {
-        if (savedArr.includes(`${city}`) === false) {
+    if (user.savedLocations.length < 6) {
+        if (user.savedLocations.includes(`${city}`) === false) {
             const savedLocationsList = document.querySelector(".saved-locations-items");
 
             const savedItem = document.createElement("div");
@@ -224,23 +209,20 @@ function saveLocation() {
             deleteSavedItemButton.appendChild(deleteIcon);
             deleteSavedItemButton.addEventListener("click", (e) => {
                 savedLocationsList.removeChild(savedItem);
-                savedLocationsCount -= 1;
+                removeItemByValue(user.savedLocations, `${city}`);
                 updateSavedLocationsCount();
-                if (savedLocationsCount === 0) {
+                if (user.savedLocations.length === 0) {
                     const noneSavedItem = document.querySelector("#saved-location-none");
                     noneSavedItem.style.display = "flex";
                 }
-                removeItemByValue(savedArr, `${city}`);
             });
             savedLocationButtons.appendChild(deleteSavedItemButton);
 
             savedLocationsList.appendChild(savedItem);
 
-            savedLocationsCount += 1;
+            user.savedLocations.push(`${city}`);
             updateSavedLocationsCount();
-
-            savedArr.push(`${city}`);
-            console.log(savedArr);
+            console.log(user.savedLocations);
         }
     }
 }
@@ -249,7 +231,7 @@ function updateSavedLocationsCount() {
     const savedLocationsCountText = document.querySelector(
         "#saved-locations-title"
     );
-    savedLocationsCountText.innerHTML = `<i class="fa-solid fa-bookmark"></i>&nbsp;&nbsp;&nbsp;Saved Locations <span>(Count: ${savedLocationsCount} / 6)</span> `;
+    savedLocationsCountText.innerHTML = `<i class="fa-solid fa-bookmark"></i>&nbsp;&nbsp;&nbsp;Saved Locations <span>(Count: ${user.savedLocations.length} / 6)</span> `;
 }
 
 function clearSearchInput() {
@@ -267,6 +249,24 @@ function clearSearchInput() {
 
     const saveButton = document.querySelector(".save-button");
     saveButton.removeEventListener("click", saveLocation, true);
+}
+
+function changeTemperatureType(type, degrees) {
+    const temperature = document.querySelector(".temperature");
+    user.temperatureType = type;
+    switch (type) {
+        case 'C':
+            temperature.innerHTML = `${parseInt(degrees)}<span>°C</span>`;
+            celsiumButton.id = "current-temp-type";
+            fahrenheitButton.id = "";
+            break;
+        case 'F':
+            const fahrenheit = ((degrees * 9) / 5) + 32;
+            temperature.innerHTML = `${parseInt(fahrenheit)}<span>°F</span>`;
+            celsiumButton.id = "";
+            fahrenheitButton.id = "current-temp-type";
+            break;
+    }
 }
 
 const logo = document.querySelector(".logo-block img");

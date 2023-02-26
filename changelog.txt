@@ -38,3 +38,16 @@ temperature types, now non functional);
 - Integrated "FlagsAPI" api to get any country flag from 2-alpha country code;
 - A check for an identical location in the list "Saved locations" was added 
 to exclude the possibility of duplication of these values;
+
+[25.02.2023]:
+- Fixed issue with saving location (The location was saved with 
+the value from the input and not with the value of the location 
+that the user is looking for);
+- Integrated "Moment.js" library (Date and time);
+- Added hover animations to "save location" items;
+- Added hover animations to "highlight" item;
+
+[26.02.2023]:
+- Integrated "String.js" library (Strings);
+- Added functional to "Celsium" and "Fahrenheit" buttons:
+    Now user can switch temperature type between celsium and fahrenheit types;
