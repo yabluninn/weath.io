@@ -395,13 +395,11 @@ button:hover {
 
 .highlights-item {
     display: flex;
-    justify-content: space-around;
-    align-items: start;
+    justify-content: space-between;
+    align-items: center;
     background-color: white;
-    flex-direction: column;
-    padding-top: 20px;
-    padding-left: 40px;
-    padding-bottom: 20px;
+    flex-direction: row;
+    padding: 20px 40px 20px 40px;
     width: 330px;
     height: 180px;
     border-radius: 18px;
@@ -412,6 +410,22 @@ button:hover {
 .highlights-item:hover {
     transform: scale(0.9);
     border: 2px solid black;
+}
+
+.highlights-item-part {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: start;
+    flex-direction: column;
+    height: 110%;
+}
+
+.highlights-item .highlights-item-part:nth-child(2) {
+    justify-content: start;
+}
+
+.highlights-item i {
+    font-size: 60px;
 }
 
 .highlights-item-title {
@@ -432,11 +446,12 @@ button:hover {
     font-size: 18px;
 }
 
-.highlights-item i {
+
+/* .highlights-item i {
     position: absolute;
     font-size: 50px;
     margin-left: 200px;
-}
+} */
 
 .error-block {
     width: 90%;
@@ -460,4 +475,34 @@ button:hover {
 
 #nothing {
     display: flex;
+}
+
+.copyButton {
+    color: black;
+    background-color: white;
+    border-radius: 25px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.5s;
+    position: absolute;
+    margin-top: -135px;
+    margin-left: 245px;
+}
+
+.copyButton:hover {
+    color: white;
+    background-color: black;
+}
+
+.copyButton i {
+    position: relative;
+    margin: 0;
+    font-size: 20px;
+}
+
+#transparent {
+    opacity: 0;
 }

@@ -50,4 +50,8 @@ that the user is looking for);
 [26.02.2023]:
 - Integrated "String.js" library (Strings);
 - Added functional to "Celsium" and "Fahrenheit" buttons:
-    Now user can switch temperature type between celsium and fahrenheit types;
+    Now users can switch temperature type between celsium and fahrenheit types;
+
+[27.02.2023]:
+- Added "Copy" buttons to all "weather highlight" blocks:
+    Now users can copy any weather detail to clipboard and share this information to each other;

@@ -6,7 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://kit.fontawesome.com/96842691bc.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/adaptive.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <!-- <link rel="stylesheet" href="https://kit.fontawesome.com/96842691bc.css" crossorigin="anonymous"> -->
     <title>Weath.io</title>
 </head>
 
@@ -14,8 +16,8 @@
     <aside class="main-info">
         <div class="input-block">
             <input type="text" placeholder="Search for places..." class="search-input">
-            <button class="search"><i class="fa-solid fa-magnifying-glass"></i></button>
-            <button class="clear-search"><i class="fa-solid fa-circle-xmark"></i></button>
+            <button class="search"><i class="bi bi-search"></i></button>
+            <button class="clear-search"><i class="bi bi-x-circle-fill"></i></button>
         </div>
         <div class="weather-mi">
             <img src="https://cdn-icons-png.flaticon.com/512/4064/4064276.png" alt="">
@@ -80,40 +82,58 @@
             <p class="subtitle"><i class="fa-solid fa-house"></i>&nbsp;&nbsp;&nbsp;Today's Highlights</p>
             <div class="highlights-items">
                 <div class="highlights-item">
-                    <p class="highlights-item-title">Humidity</p>
-                    <p class="highlights-item-text" id="humidity">- <span>%</span></p>
-                    <p class="status">High&nbsp;</p>
-                    <i class="fa-solid fa-water"></i>
+                    <div class="highlights-item-part">
+                        <p class="highlights-item-title">Humidity</p>
+                        <p class="highlights-item-text" id="humidity">- <span>%</span></p>
+                        <p class="status">High&nbsp;</p>
+                    </div>
+                    <i class="bi bi-water"></i>
+                    <button class="copyButton humidityItem"><i class="bi bi-clipboard-fill"></i></button>
                 </div>
                 <div class="highlights-item">
-                    <p class="highlights-item-title">Wind Speed</p>
-                    <p class="highlights-item-text" id="windspeed">- <span>km/h</span></p>
-                    <p class="status">High&nbsp;</p>
-                    <i class="fa-solid fa-wind"></i>
+                    <div class="highlights-item-part">
+                        <p class="highlights-item-title">Wind Speed</p>
+                        <p class="highlights-item-text" id="windspeed">- <span>km/h</span></p>
+                        <p class="status">High&nbsp;</p>
+                    </div>
+                    <i class="bi bi-wind"></i>
+                    <button class="copyButton windspeedItem"><i class="bi bi-clipboard-fill"></i></button>
                 </div>
                 <div class="highlights-item">
-                    <p class="highlights-item-title">Visibility</p>
-                    <p class="highlights-item-text" id="visibility">- <span>km</span></p>
-                    <p class="status">Good&nbsp;</p>
-                    <i class="fa-solid fa-eye"></i>
+                    <div class="highlights-item-part">
+                        <p class="highlights-item-title">Visibility</p>
+                        <p class="highlights-item-text" id="visibility">- <span>km</span></p>
+                        <p class="status">Good&nbsp;</p>
+                    </div>
+                    <i class="bi bi-eyeglasses"></i>
+                    <button class="copyButton visibilityItem"><i class="bi bi-clipboard-fill"></i></button>
                 </div>
                 <div class="highlights-item">
-                    <p class="highlights-item-title">Cloudiness</p>
-                    <p class="highlights-item-text" id="cloudiness">- <span>%</span></p>
-                    <p class="status">Good&nbsp;</p>
-                    <i class="fa-solid fa-cloud"></i>
+                    <div class="highlights-item-part">
+                        <p class="highlights-item-title">Cloudiness</p>
+                        <p class="highlights-item-text" id="cloudiness">- <span>%</span></p>
+                        <p class="status">Good&nbsp;</p>
+                    </div>
+                    <i class="bi bi-clouds"></i>
+                    <button class="copyButton cloudinessItem"><i class="bi bi-clipboard-fill"></i></button>
                 </div>
                 <div class="highlights-item">
-                    <p class="highlights-item-title">Air Quality</p>
-                    <p class="highlights-item-text">-</p>
-                    <p class="status">Moderate&nbsp;</p>
-                    <i class="fa-solid fa-smog"></i>
+                    <div class="highlights-item-part">
+                        <p class="highlights-item-title">Air Quality</p>
+                        <p class="highlights-item-text">-</p>
+                        <p class="status">Moderate&nbsp;</p>
+                    </div>
+                    <i class="bi bi-radioactive"></i>
+                    <button class="copyButton"><i class="bi bi-clipboard-fill"></i></button>
                 </div>
                 <div class="highlights-item">
-                    <p class="highlights-item-title">Pressure</p>
-                    <p class="highlights-item-text" id="pressure">- <span>hPa</span></p>
-                    <p class="status">Good&nbsp;</p>
-                    <i class="fa-solid fa-weight-hanging"></i>
+                    <div class="highlights-item-part">
+                        <p class="highlights-item-title">Pressure</p>
+                        <p class="highlights-item-text" id="pressure">- <span>hPa</span></p>
+                        <p class="status">Good&nbsp;</p>
+                    </div>
+                    <i class="bi bi-lungs"></i>
+                    <button class="copyButton pressureItem"><i class="bi bi-clipboard-fill"></i></button>
                 </div>
             </div>
         </div>

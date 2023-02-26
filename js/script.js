@@ -149,6 +149,17 @@ function searchWeather() {
 
             console.log(json);
             console.log(json.sys.country);
+
+            const humidityItem = document.querySelector('.humidityItem');
+            humidityItem.addEventListener("click", function() { copyDetailsToClipboard(`Humidity in ${city} (${json.sys.country}) : ${json.main.humidity} %`, humidityItem) });
+            const windSpeedItem = document.querySelector('.windspeedItem');
+            windSpeedItem.addEventListener("click", function() { copyDetailsToClipboard(`Wind speed in ${city} (${json.sys.country}) : ${json.wind.speed} km/h`, windSpeedItem) });
+            const visibilityItem = document.querySelector('.visibilityItem');
+            visibilityItem.addEventListener("click", function() { copyDetailsToClipboard(`Visibility in ${city} (${json.sys.country}) : ${visibilityValue} km`, visibilityItem) });
+            const cloudinessItem = document.querySelector('.cloudinessItem');
+            cloudinessItem.addEventListener("click", function() { copyDetailsToClipboard(`Cloudiness in ${city} (${json.sys.country}) : ${json.clouds.all} %`, cloudinessItem) });
+            const pressureItem = document.querySelector('.pressureItem');
+            pressureItem.addEventListener("click", function() { copyDetailsToClipboard(`Cloudiness in ${city} (${json.sys.country}) : ${json.main.pressure} hPa`, cloudinessItem) });
         });
 }
 
@@ -267,6 +278,17 @@ function changeTemperatureType(type, degrees) {
             fahrenheitButton.id = "current-temp-type";
             break;
     }
+}
+
+function copyDetailsToClipboard(text, buttonObj) {
+    navigator.clipboard.writeText("");
+    navigator.clipboard.writeText(text + "\nSearch weather in your location: https://yabluninn.github.io/weath.io/");
+    //alert("Weather details are copied!");
+    const clipboardIcon = buttonObj.firstElementChild;
+    clipboardIcon.className = "bi bi-clipboard-check";
+    setTimeout(function() {
+        clipboardIcon.className = "bi bi-clipboard-fill";
+    }, 1500);
 }
 
 const logo = document.querySelector(".logo-block img");
