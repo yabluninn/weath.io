@@ -55,3 +55,6 @@ that the user is looking for);
 [27.02.2023]:
 - Added "Copy" buttons to all "weather highlight" blocks:
     Now users can copy any weather detail to clipboard and share this information to each other;
+- Added saving system (LocalStorage):
+    Now users can save and load next information: Temperature type (Celsium or Fahrenheit) and
+    all saved locations;

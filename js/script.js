@@ -13,18 +13,99 @@ const visibility = document.querySelector("#visibility");
 const cloudiness = document.querySelector("#cloudiness");
 const pressure = document.querySelector("#pressure");
 
+const temperatureTypeButtons = document.querySelector('.temperature-type-block');
+const celsiumButton = temperatureTypeButtons.firstElementChild;
+const fahrenheitButton = temperatureTypeButtons.lastElementChild;
+
 let defaultTemperatureType = 'C';
+let savedLocationOption = {
+    location: '',
+    country: ''
+}
 let user = {
     savedLocations: [],
     temperatureType: ''
 }
 
+if (localStorage.getItem('user')) {
+    let requiredUser = localStorage.getItem('user');
+    let parsedRequiredUser = JSON.parse(requiredUser);
+    if (parsedRequiredUser.temperatureType === 'C') {
+        celsiumButton.id = "current-temp-type";
+        fahrenheitButton.id = "";
+    } else if (parsedRequiredUser.temperatureType === 'F') {
+        celsiumButton.id = "";
+        fahrenheitButton.id = "current-temp-type";
+    }
+    if (parsedRequiredUser.savedLocations.length === 0) {
+
+    } else if (parsedRequiredUser.savedLocations.length > 0) {
+        const noneSavedItem = document.querySelector("#saved-location-none");
+        noneSavedItem.style.display = "none";
+        for (let i = 0; i < parsedRequiredUser.savedLocations.length; i++) {
+            const savedLocationsList = document.querySelector(".saved-locations-items");
+
+            const savedItem = document.createElement("div");
+            savedItem.className = "saved-locations-item";
+
+            const savedItemName = document.createElement("p");
+            savedItemName.className = "saved-locations-name";
+            savedItemName.textContent = parsedRequiredUser.savedLocations[i].location;
+            savedItem.appendChild(savedItemName);
+
+            const savedItemFlag = document.createElement("img");
+            const countryCode = parsedRequiredUser.savedLocations[i].country;
+            const countryFlagURL = `https://flagsapi.com/${countryCode}/flat/64.png`;
+            savedItemFlag.src = countryFlagURL;
+            savedItem.appendChild(savedItemFlag);
+
+            const savedLocationButtons = document.createElement("div");
+            savedLocationButtons.className = "saved-locations-buttons";
+            savedItem.appendChild(savedLocationButtons);
+
+            const searchSavedItem = document.createElement("button");
+            searchSavedItem.className = "saved-location-search";
+            const searchIcon = document.createElement("i");
+            searchIcon.className = "fa-solid fa-magnifying-glass";
+            searchSavedItem.appendChild(searchIcon);
+            searchSavedItem.addEventListener("click", (e) => {
+                searchInput.value = savedItemName.textContent;
+                searchWeather();
+            });
+            savedLocationButtons.appendChild(searchSavedItem);
+
+            const deleteSavedItemButton = document.createElement("button");
+            deleteSavedItemButton.className = "saved-location-delete";
+            const deleteIcon = document.createElement("i");
+            deleteIcon.className = "fa-solid fa-trash";
+            deleteSavedItemButton.appendChild(deleteIcon);
+            deleteSavedItemButton.addEventListener("click", (e) => {
+                savedLocationsList.removeChild(savedItem);
+                let requiredUser = localStorage.getItem('user');
+                let parsedRequiredUser = JSON.parse(requiredUser);
+                removeItemByValue(parsedRequiredUser.savedLocations, parsedRequiredUser.savedLocations[i].location);
+                localStorage.setItem('user', JSON.stringify(parsedRequiredUser));
+                updateSavedLocationsCount();
+                if (parsedRequiredUser.savedLocations.length === 0) {
+                    const noneSavedItem = document.querySelector("#saved-location-none");
+                    noneSavedItem.style.display = "flex";
+                }
+            });
+            savedLocationButtons.appendChild(deleteSavedItemButton);
+
+            savedLocationsList.appendChild(savedItem);
+        }
+    }
+} else {
+    let newUser = Object.assign({}, user);
+    newUser.temperatureType = defaultTemperatureType;
+    localStorage.setItem("user", JSON.stringify(newUser));
+}
+
+updateSavedLocationsCount();
+
 const todayDate = document.querySelector(".today-date");
 todayDate.innerHTML = "(" + moment().format('LL') + ")";
-
-const temperatureTypeButtons = document.querySelector('.temperature-type-block');
-const celsiumButton = temperatureTypeButtons.firstElementChild;
-const fahrenheitButton = temperatureTypeButtons.lastElementChild;
 
 function checkTime(num) {
     if (num < 10) {
@@ -35,7 +116,7 @@ function checkTime(num) {
 
 function removeItemByValue(arr, value) {
     for (let i = 0; i < arr.length; i++) {
-        if (arr[i] === value) {
+        if (arr[i].location === value) {
             arr.splice(i, 1);
         }
     }
@@ -114,12 +195,12 @@ function searchWeather() {
 
             celsiumButton.addEventListener("click", function() { changeTemperatureType('C', json.main.temp) });
             fahrenheitButton.addEventListener("click", function() { changeTemperatureType('F', json.main.temp) });
-            if (user.temperatureType === 'C') {
+            let requiredUser = localStorage.getItem('user');
+            let parsedRequiredUser = JSON.parse(requiredUser);
+            if (parsedRequiredUser.temperatureType === 'C') {
                 changeTemperatureType('C', json.main.temp);
-            } else if (user.temperatureType === 'F') {
+            } else if (parsedRequiredUser.temperatureType === 'F') {
                 changeTemperatureType('F', json.main.temp);
-            } else if (user.temperatureType === '') {
-                changeTemperatureType(defaultTemperatureType, json.main.temp);
             }
 
             humidity.innerHTML = `${json.main.humidity}<span> %</span>`;
@@ -160,29 +241,32 @@ function searchWeather() {
             cloudinessItem.addEventListener("click", function() { copyDetailsToClipboard(`Cloudiness in ${city} (${json.sys.country}) : ${json.clouds.all} %`, cloudinessItem) });
             const pressureItem = document.querySelector('.pressureItem');
             pressureItem.addEventListener("click", function() { copyDetailsToClipboard(`Cloudiness in ${city} (${json.sys.country}) : ${json.main.pressure} hPa`, cloudinessItem) });
+
+            const saveButton = document.querySelector(".save-button");
+            saveButton.addEventListener("click", (e) => {
+                saveLocation(countryCode);
+            });
         });
 }
 
 search.addEventListener("click", searchWeather);
 clearSearch.addEventListener("click", clearSearchInput);
-const saveButton = document.querySelector(".save-button");
-saveButton.addEventListener("click", (e) => {
-    saveLocation();
-});
 
 const savedLocationsList = document.querySelector(".saved-locations-list");
 
-function saveLocation() {
+function saveLocation(countryCode) {
+    let requiredUser = localStorage.getItem('user');
+    let parsedRequiredUser = JSON.parse(requiredUser);
     if (searchInput.value === "") return;
 
-    if (user.savedLocations.length === 0) {
+    if (parsedRequiredUser.savedLocations.length === 0) {
         const noneSavedItem = document.querySelector("#saved-location-none");
         noneSavedItem.style.display = "none";
     }
     const tempCity = cityName.textContent;
     const city = tempCity.charAt(0).toUpperCase() + tempCity.slice(1);
-    if (user.savedLocations.length < 6) {
-        if (user.savedLocations.includes(`${city}`) === false) {
+    if (parsedRequiredUser.savedLocations.length < 6) {
+        if (parsedRequiredUser.savedLocations.includes(`${city}`) === false) {
             const savedLocationsList = document.querySelector(".saved-locations-items");
 
             const savedItem = document.createElement("div");
@@ -220,9 +304,9 @@ function saveLocation() {
             deleteSavedItemButton.appendChild(deleteIcon);
             deleteSavedItemButton.addEventListener("click", (e) => {
                 savedLocationsList.removeChild(savedItem);
-                removeItemByValue(user.savedLocations, `${city}`);
+                removeItemByValue(parsedRequiredUser.savedLocations, `${city}`);
                 updateSavedLocationsCount();
-                if (user.savedLocations.length === 0) {
+                if (parsedRequiredUser.savedLocations.length === 0) {
                     const noneSavedItem = document.querySelector("#saved-location-none");
                     noneSavedItem.style.display = "flex";
                 }
@@ -231,9 +315,14 @@ function saveLocation() {
 
             savedLocationsList.appendChild(savedItem);
 
-            user.savedLocations.push(`${city}`);
+            let locationOptions = Object.assign({}, savedLocationOption);
+            locationOptions.location = city;
+            locationOptions.country = countryCode;
+
+            parsedRequiredUser.savedLocations.push(locationOptions);
+            localStorage.setItem('user', JSON.stringify(parsedRequiredUser));
+
             updateSavedLocationsCount();
-            console.log(user.savedLocations);
         }
     }
 }
@@ -242,7 +331,9 @@ function updateSavedLocationsCount() {
     const savedLocationsCountText = document.querySelector(
         "#saved-locations-title"
     );
-    savedLocationsCountText.innerHTML = `<i class="fa-solid fa-bookmark"></i>&nbsp;&nbsp;&nbsp;Saved Locations <span>(Count: ${user.savedLocations.length} / 6)</span> `;
+    let requiredUser = localStorage.getItem('user');
+    let parsedRequiredUser = JSON.parse(requiredUser);
+    savedLocationsCountText.innerHTML = `<i class="fa-solid fa-bookmark"></i>&nbsp;&nbsp;&nbsp;Saved Locations <span>(Count: ${parsedRequiredUser.savedLocations.length} / 6)</span> `;
 }
 
 function clearSearchInput() {
@@ -264,7 +355,10 @@ function clearSearchInput() {
 
 function changeTemperatureType(type, degrees) {
     const temperature = document.querySelector(".temperature");
-    user.temperatureType = type;
+    let requiredUser = localStorage.getItem('user');
+    let parsedRequiredUser = JSON.parse(requiredUser);
+    parsedRequiredUser.temperatureType = type;
+    localStorage.setItem('user', JSON.stringify(parsedRequiredUser));
     switch (type) {
         case 'C':
             temperature.innerHTML = `${parseInt(degrees)}<span>°C</span>`;
