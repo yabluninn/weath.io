@@ -28,21 +28,21 @@
                 <p class="rain-chance"><i class="fa-solid fa-umbrella"></i>&nbsp;&nbsp;&nbsp;&nbsp;Rain - 30%</p>
             </div>
             <div class="weather-mi-location">
-                <i class="fa-solid fa-location-dot"></i>
+                <i class="bi bi-geo-alt-fill"></i>
                 <p class="location-name">Kiev</p>
             </div>
             <div class="weather-mi-footer">
                 <img src="https://cdn-icons-png.flaticon.com/512/330/330459.png" alt="">
-                <button class="save-button"><i class="fa-regular fa-bookmark"></i>Save</button>
+                <button class="save-button"><i class="bi bi-cloud-download"></i>Save</button>
             </div>
         </div>
         <div class="error-block" id="notfound">
             <p>Weather at the current location not found! <br> Try again</p>
-            <img src="https://cdn-icons-png.flaticon.com/512/1895/1895100.png" alt="">
+            <img src="https://cdn-icons-png.flaticon.com/512/6665/6665325.png" alt="">
         </div>
         <div class="error-block" id="nothing">
             <p>Search weather at need location and get latest data about it!</p>
-            <img src="https://cdn-icons-png.flaticon.com/512/2443/2443789.png" alt="">
+            <img src="https://cdn-icons-png.flaticon.com/512/4652/4652346.png" alt="">
         </div>
     </aside>
     <section class="other-info">
@@ -57,11 +57,11 @@
             </div>
             <div class="logo-block">
                 <p>Weath.io</p>
-                <img src="https://cdn-icons-png.flaticon.com/512/9231/9231625.png" alt="">
+                <img src="https://cdn-icons-png.flaticon.com/512/5579/5579975.png" alt="">
             </div>
         </div>
         <div class="saved-locations-block">
-            <p class="subtitle" id="saved-locations-title"><i class="fa-solid fa-bookmark"></i>&nbsp;&nbsp;&nbsp;Saved Locations <span>(Count: 0 / 6)</span></p>
+            <p class="subtitle" id="saved-locations-title"><i class="bi bi-bookmarks-fill"></i>&nbsp;&nbsp;&nbsp;Saved Locations <span>(Count: 0 / 6)</span></p>
             <div class="saved-locations-items">
                 <div class="saved-locations-item" id="saved-location-none">
                     <p class="saved-locations-name">None</p>
@@ -79,7 +79,7 @@
             </div>
         </div>
         <div class="weather-highlights-block">
-            <p class="subtitle"><i class="fa-solid fa-house"></i>&nbsp;&nbsp;&nbsp;Today's Highlights</p>
+            <p class="subtitle"><i class="bi bi-grid-1x2-fill"></i>&nbsp;&nbsp;&nbsp;Today's Highlights</p>
             <div class="highlights-items">
                 <div class="highlights-item">
                     <div class="highlights-item-part">
@@ -87,7 +87,8 @@
                         <p class="highlights-item-text" id="humidity">- <span>%</span></p>
                         <p class="status">High&nbsp;</p>
                     </div>
-                    <i class="bi bi-water"></i>
+                    <!-- <i class="bi bi-water"></i> -->
+                    <img src="https://cdn-icons-png.flaticon.com/512/4005/4005831.png" alt="">
                     <button class="copyButton humidityItem"><i class="bi bi-clipboard-fill"></i></button>
                 </div>
                 <div class="highlights-item">
@@ -96,7 +97,7 @@
                         <p class="highlights-item-text" id="windspeed">- <span>km/h</span></p>
                         <p class="status">High&nbsp;</p>
                     </div>
-                    <i class="bi bi-wind"></i>
+                    <img src="https://cdn-icons-png.flaticon.com/512/4005/4005828.png" alt="">
                     <button class="copyButton windspeedItem"><i class="bi bi-clipboard-fill"></i></button>
                 </div>
                 <div class="highlights-item">
@@ -105,7 +106,7 @@
                         <p class="highlights-item-text" id="visibility">- <span>km</span></p>
                         <p class="status">Good&nbsp;</p>
                     </div>
-                    <i class="bi bi-eyeglasses"></i>
+                    <img src="https://cdn-icons-png.flaticon.com/512/4005/4005908.png" alt="">
                     <button class="copyButton visibilityItem"><i class="bi bi-clipboard-fill"></i></button>
                 </div>
                 <div class="highlights-item">
@@ -114,7 +115,7 @@
                         <p class="highlights-item-text" id="cloudiness">- <span>%</span></p>
                         <p class="status">Good&nbsp;</p>
                     </div>
-                    <i class="bi bi-clouds"></i>
+                    <img src="https://cdn-icons-png.flaticon.com/512/4005/4005883.png" alt="">
                     <button class="copyButton cloudinessItem"><i class="bi bi-clipboard-fill"></i></button>
                 </div>
                 <div class="highlights-item">
@@ -123,7 +124,7 @@
                         <p class="highlights-item-text">-</p>
                         <p class="status">Moderate&nbsp;</p>
                     </div>
-                    <i class="bi bi-radioactive"></i>
+                    <img src="https://cdn-icons-png.flaticon.com/512/5029/5029184.png" alt="">
                     <button class="copyButton"><i class="bi bi-clipboard-fill"></i></button>
                 </div>
                 <div class="highlights-item">
@@ -132,18 +133,22 @@
                         <p class="highlights-item-text" id="pressure">- <span>hPa</span></p>
                         <p class="status">Good&nbsp;</p>
                     </div>
-                    <i class="bi bi-lungs"></i>
+                    <img src="https://cdn-icons-png.flaticon.com/512/4005/4005925.png" alt="">
                     <button class="copyButton pressureItem"><i class="bi bi-clipboard-fill"></i></button>
                 </div>
             </div>
         </div>
     </section>
     <!--Fontawesome icons-->
-    <script src="https://kit.fontawesome.com/7c8801c017.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://kit.fontawesome.com/7c8801c017.js" crossorigin="anonymous"></script> -->
     <!-- Moment.js library (Date & Time) -->
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
     <!-- String.js library (String) -->
     <script src="https://cdn.rawgit.com/jprichardson/string.js/master/dist/string.min.js"></script>
+    <!-- Sugar.js library -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/sugar@2.0.6/index.min.js"></script> -->
+    <!-- JQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <!-- Main script -->
     <script src="js/script.js"></script>
 </body>

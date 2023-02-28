@@ -58,3 +58,7 @@ that the user is looking for);
 - Added saving system (LocalStorage):
     Now users can save and load next information: Temperature type (Celsium or Fahrenheit) and
     all saved locations;
+
+[01.03.2023]:
+- Integrated "JQuery" library;
+- Fixed issues with saving and removing location;

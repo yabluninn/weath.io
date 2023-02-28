@@ -20,7 +20,8 @@ const fahrenheitButton = temperatureTypeButtons.lastElementChild;
 let defaultTemperatureType = 'C';
 let savedLocationOption = {
     location: '',
-    country: ''
+    country: '',
+    id: 0
 }
 let user = {
     savedLocations: [],
@@ -38,7 +39,8 @@ if (localStorage.getItem('user')) {
         fahrenheitButton.id = "current-temp-type";
     }
     if (parsedRequiredUser.savedLocations.length === 0) {
-
+        const noneSavedItem = document.querySelector("#saved-location-none");
+        noneSavedItem.style.display = "flex";
     } else if (parsedRequiredUser.savedLocations.length > 0) {
         const noneSavedItem = document.querySelector("#saved-location-none");
         noneSavedItem.style.display = "none";
@@ -66,9 +68,13 @@ if (localStorage.getItem('user')) {
             const searchSavedItem = document.createElement("button");
             searchSavedItem.className = "saved-location-search";
             const searchIcon = document.createElement("i");
-            searchIcon.className = "fa-solid fa-magnifying-glass";
+            searchIcon.className = "bi bi-search";
             searchSavedItem.appendChild(searchIcon);
-            searchSavedItem.addEventListener("click", (e) => {
+            // searchSavedItem.addEventListener("click", (e) => {
+            //     searchInput.value = savedItemName.textContent;
+            //     searchWeather();
+            // });
+            $(searchSavedItem).on("click", function() {
                 searchInput.value = savedItemName.textContent;
                 searchWeather();
             });
@@ -77,19 +83,15 @@ if (localStorage.getItem('user')) {
             const deleteSavedItemButton = document.createElement("button");
             deleteSavedItemButton.className = "saved-location-delete";
             const deleteIcon = document.createElement("i");
-            deleteIcon.className = "fa-solid fa-trash";
+            deleteIcon.className = "bi bi-trash3-fill";
             deleteSavedItemButton.appendChild(deleteIcon);
-            deleteSavedItemButton.addEventListener("click", (e) => {
+            // deleteSavedItemButton.addEventListener("click", (e) => {
+            //     savedLocationsList.removeChild(savedItem);
+            //     removeLocation(parsedRequiredUser.savedLocations[i].location);
+            // });
+            $(deleteSavedItemButton).on("click", function() {
                 savedLocationsList.removeChild(savedItem);
-                let requiredUser = localStorage.getItem('user');
-                let parsedRequiredUser = JSON.parse(requiredUser);
-                removeItemByValue(parsedRequiredUser.savedLocations, parsedRequiredUser.savedLocations[i].location);
-                localStorage.setItem('user', JSON.stringify(parsedRequiredUser));
-                updateSavedLocationsCount();
-                if (parsedRequiredUser.savedLocations.length === 0) {
-                    const noneSavedItem = document.querySelector("#saved-location-none");
-                    noneSavedItem.style.display = "flex";
-                }
+                removeLocation(parsedRequiredUser.savedLocations[i].location);
             });
             savedLocationButtons.appendChild(deleteSavedItemButton);
 
@@ -114,13 +116,10 @@ function checkTime(num) {
     return num;
 }
 
-function removeItemByValue(arr, value) {
-    for (let i = 0; i < arr.length; i++) {
-        if (arr[i].location === value) {
-            arr.splice(i, 1);
-        }
-    }
-}
+// function removeObjFromArray(arr, value) {
+//     arr = arr.filter(item => item.location != value);
+//     return arr;
+// }
 
 function searchWeather() {
     const APIKey = "584ca977c587314c7e2a79863cea8226";
@@ -193,8 +192,14 @@ function searchWeather() {
 
             cityName.innerHTML = city;
 
-            celsiumButton.addEventListener("click", function() { changeTemperatureType('C', json.main.temp) });
-            fahrenheitButton.addEventListener("click", function() { changeTemperatureType('F', json.main.temp) });
+            $(celsiumButton).on("click", function() {
+                changeTemperatureType('C', json.main.temp);
+            });
+            $(fahrenheitButton).on("click", function() {
+                changeTemperatureType('F', json.main.temp);
+            });
+            // celsiumButton.addEventListener("click", function() { changeTemperatureType('C', json.main.temp) });
+            // fahrenheitButton.addEventListener("click", function() { changeTemperatureType('F', json.main.temp) });
             let requiredUser = localStorage.getItem('user');
             let parsedRequiredUser = JSON.parse(requiredUser);
             if (parsedRequiredUser.temperatureType === 'C') {
@@ -230,31 +235,54 @@ function searchWeather() {
 
             console.log(json);
             console.log(json.sys.country);
+            const saveButton = document.querySelector(".save-button");
+            // saveButton.onClick = function() { saveLocation(cityName.textContent, json.sys.country) };
+            $(saveButton).on("click", function() {
+                saveLocation(cityName.textContent, json.sys.country);
+            });
 
             const humidityItem = document.querySelector('.humidityItem');
-            humidityItem.addEventListener("click", function() { copyDetailsToClipboard(`Humidity in ${city} (${json.sys.country}) : ${json.main.humidity} %`, humidityItem) });
             const windSpeedItem = document.querySelector('.windspeedItem');
-            windSpeedItem.addEventListener("click", function() { copyDetailsToClipboard(`Wind speed in ${city} (${json.sys.country}) : ${json.wind.speed} km/h`, windSpeedItem) });
             const visibilityItem = document.querySelector('.visibilityItem');
-            visibilityItem.addEventListener("click", function() { copyDetailsToClipboard(`Visibility in ${city} (${json.sys.country}) : ${visibilityValue} km`, visibilityItem) });
             const cloudinessItem = document.querySelector('.cloudinessItem');
-            cloudinessItem.addEventListener("click", function() { copyDetailsToClipboard(`Cloudiness in ${city} (${json.sys.country}) : ${json.clouds.all} %`, cloudinessItem) });
             const pressureItem = document.querySelector('.pressureItem');
-            pressureItem.addEventListener("click", function() { copyDetailsToClipboard(`Cloudiness in ${city} (${json.sys.country}) : ${json.main.pressure} hPa`, cloudinessItem) });
 
-            const saveButton = document.querySelector(".save-button");
-            saveButton.addEventListener("click", (e) => {
-                saveLocation(countryCode);
+            $(humidityItem).on("click", function() {
+                copyDetailsToClipboard(`Humidity in ${city} (${json.sys.country}) : ${json.main.humidity} %`, humidityItem);
             });
+            $(windSpeedItem).on("click", function() {
+                copyDetailsToClipboard(`Wind speed in ${city} (${json.sys.country}) : ${json.wind.speed} km/h`, windSpeedItem);
+            });
+            $(visibilityItem).on("click", function() {
+                copyDetailsToClipboard(`Visibility in ${city} (${json.sys.country}) : ${visibilityValue} km`, windSpeedItem);
+            });
+            $(cloudinessItem).on("click", function() {
+                copyDetailsToClipboard(`Cloudiness in ${city} (${json.sys.country}) : ${json.clouds.all} %`, cloudinessItem);
+            });
+            $(pressureItem).on("click", function() {
+                copyDetailsToClipboard(`Pressure in ${city} (${json.sys.country}) : ${json.main.pressure} hPa`, pressureItem)
+            });
+            // humidityItem.addEventListener("click", function() { copyDetailsToClipboard(`Humidity in ${city} (${json.sys.country}) : ${json.main.humidity} %`, humidityItem) });
+            // windSpeedItem.addEventListener("click", function() { copyDetailsToClipboard(`Wind speed in ${city} (${json.sys.country}) : ${json.wind.speed} km/h`, windSpeedItem) });
+            // visibilityItem.addEventListener("click", function() { copyDetailsToClipboard(`Visibility in ${city} (${json.sys.country}) : ${visibilityValue} km`, visibilityItem) });
+            // cloudinessItem.addEventListener("click", function() { copyDetailsToClipboard(`Cloudiness in ${city} (${json.sys.country}) : ${json.clouds.all} %`, cloudinessItem) });
+            // pressureItem.addEventListener("click", function() { copyDetailsToClipboard(`Cloudiness in ${city} (${json.sys.country}) : ${json.main.pressure} hPa`, cloudinessItem) });
+
         });
 }
 
-search.addEventListener("click", searchWeather);
-clearSearch.addEventListener("click", clearSearchInput);
+$(search).on("click", function() {
+    searchWeather();
+});
+$(clearSearch).on("click", function() {
+    clearSearchInput();
+});
+// search.addEventListener("click", searchWeather);
+// clearSearch.addEventListener("click", clearSearchInput);
 
 const savedLocationsList = document.querySelector(".saved-locations-list");
 
-function saveLocation(countryCode) {
+function saveLocation(name, countryCode) {
     let requiredUser = localStorage.getItem('user');
     let parsedRequiredUser = JSON.parse(requiredUser);
     if (searchInput.value === "") return;
@@ -263,10 +291,9 @@ function saveLocation(countryCode) {
         const noneSavedItem = document.querySelector("#saved-location-none");
         noneSavedItem.style.display = "none";
     }
-    const tempCity = cityName.textContent;
-    const city = tempCity.charAt(0).toUpperCase() + tempCity.slice(1);
     if (parsedRequiredUser.savedLocations.length < 6) {
-        if (parsedRequiredUser.savedLocations.includes(`${city}`) === false) {
+        let neededLocation = parsedRequiredUser.savedLocations.find(item => item.location === `${name}`);
+        if (neededLocation === undefined) {
             const savedLocationsList = document.querySelector(".saved-locations-items");
 
             const savedItem = document.createElement("div");
@@ -274,7 +301,7 @@ function saveLocation(countryCode) {
 
             const savedItemName = document.createElement("p");
             savedItemName.className = "saved-locations-name";
-            savedItemName.textContent = city;
+            savedItemName.textContent = name;
             savedItem.appendChild(savedItemName);
 
             const savedItemFlag = document.createElement("img");
@@ -289,9 +316,13 @@ function saveLocation(countryCode) {
             const searchSavedItem = document.createElement("button");
             searchSavedItem.className = "saved-location-search";
             const searchIcon = document.createElement("i");
-            searchIcon.className = "fa-solid fa-magnifying-glass";
+            searchIcon.className = "bi bi-search";
             searchSavedItem.appendChild(searchIcon);
-            searchSavedItem.addEventListener("click", (e) => {
+            // searchSavedItem.addEventListener("click", (e) => {
+            //     searchInput.value = savedItemName.textContent;
+            //     searchWeather();
+            // });
+            $(searchSavedItem).on("click", function() {
                 searchInput.value = savedItemName.textContent;
                 searchWeather();
             });
@@ -300,31 +331,66 @@ function saveLocation(countryCode) {
             const deleteSavedItemButton = document.createElement("button");
             deleteSavedItemButton.className = "saved-location-delete";
             const deleteIcon = document.createElement("i");
-            deleteIcon.className = "fa-solid fa-trash";
+            deleteIcon.className = "bi bi-trash3-fill";
             deleteSavedItemButton.appendChild(deleteIcon);
-            deleteSavedItemButton.addEventListener("click", (e) => {
+            // deleteSavedItemButton.addEventListener("click", (e) => {
+            //     savedLocationsList.removeChild(savedItem);
+            //     //removeObjFromArray(parsedRequiredUser.savedLocations, `${city}`);
+            //     // parsedRequiredUser.savedLocations = parsedRequiredUser.savedLocations.filter(item => item.location != city);
+            //     // console.log("DELETING OBJ: " + parsedRequiredUser.savedLocations);
+            //     // let neededLocation = parsedRequiredUser.savedLocations.find(item => item.location === `${name}`);
+            //     // localStorage.setItem('user', JSON.stringify(parsedRequiredUser));
+            //     // updateSavedLocationsCount();
+            //     removeLocation(name);
+            // });
+            $(deleteSavedItemButton).on("click", function() {
                 savedLocationsList.removeChild(savedItem);
-                removeItemByValue(parsedRequiredUser.savedLocations, `${city}`);
-                updateSavedLocationsCount();
-                if (parsedRequiredUser.savedLocations.length === 0) {
-                    const noneSavedItem = document.querySelector("#saved-location-none");
-                    noneSavedItem.style.display = "flex";
-                }
+                removeLocation(name);
             });
             savedLocationButtons.appendChild(deleteSavedItemButton);
 
             savedLocationsList.appendChild(savedItem);
 
             let locationOptions = Object.assign({}, savedLocationOption);
-            locationOptions.location = city;
+            locationOptions.location = name;
             locationOptions.country = countryCode;
 
             parsedRequiredUser.savedLocations.push(locationOptions);
             localStorage.setItem('user', JSON.stringify(parsedRequiredUser));
 
             updateSavedLocationsCount();
+
+            $('.save-button').off("click");
         }
     }
+}
+
+function removeLocation(name) {
+    let requiredUser = localStorage.getItem('user');
+    let parsedRequiredUser = JSON.parse(requiredUser);
+    let neededLocation = parsedRequiredUser.savedLocations.find(item => item.location === `${name}`);
+    console.log("NEEDED OBJ: " + JSON.stringify(neededLocation))
+    for (let i = 0; i < parsedRequiredUser.savedLocations.length; i++) {
+        if (neededLocation.location === parsedRequiredUser.savedLocations[i].location) {
+            parsedRequiredUser.savedLocations.splice(i, 1);
+            localStorage.setItem('user', JSON.stringify(parsedRequiredUser));
+            updateSavedLocationsCount();
+            break;
+        }
+    }
+    if (parsedRequiredUser.savedLocations.length === 0) {
+        const noneSavedItem = document.querySelector("#saved-location-none");
+        noneSavedItem.style.display = "flex";
+    }
+
+    // parsedRequiredUser.savedLocations = parsedRequiredUser.savedLocations.filter((a, i) => {
+    //     if (name === a.location) {
+    //         parsedRequiredUser.savedLocations.splice(i, 1);
+    //     }
+    // });
+    // localStorage.setItem('user', JSON.stringify(parsedRequiredUser));
+    // buttonObj.removeEventListener("click", removeLocation, true);
+    // console.log(parsedRequiredUser);
 }
 
 function updateSavedLocationsCount() {
@@ -333,7 +399,7 @@ function updateSavedLocationsCount() {
     );
     let requiredUser = localStorage.getItem('user');
     let parsedRequiredUser = JSON.parse(requiredUser);
-    savedLocationsCountText.innerHTML = `<i class="fa-solid fa-bookmark"></i>&nbsp;&nbsp;&nbsp;Saved Locations <span>(Count: ${parsedRequiredUser.savedLocations.length} / 6)</span> `;
+    savedLocationsCountText.innerHTML = `<i class="bi bi-bookmarks-fill"></i>&nbsp;&nbsp;&nbsp;Saved Locations <span>(Count: ${parsedRequiredUser.savedLocations.length} / 6)</span> `;
 }
 
 function clearSearchInput() {
@@ -349,8 +415,8 @@ function clearSearchInput() {
     cloudiness.innerHTML = "-<span> %</span>";
     pressure.innerHTML = "-<span> hPa</span>";
 
-    const saveButton = document.querySelector(".save-button");
-    saveButton.removeEventListener("click", saveLocation, true);
+    // const saveButton = document.querySelector(".save-button");
+    // saveButton.removeEventListener("click", saveLocation, true);
 }
 
 function changeTemperatureType(type, degrees) {

@@ -424,8 +424,9 @@ button:hover {
     justify-content: start;
 }
 
-.highlights-item i {
-    font-size: 60px;
+.highlights-item img {
+    width: 60px;
+    height: 60px;
 }
 
 .highlights-item-title {
