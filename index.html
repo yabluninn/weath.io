@@ -47,17 +47,18 @@
     </aside>
     <section class="other-info">
         <div class="header">
-            <div class="today-block">
-                <p class="today-text">Today</p>
-                <p class="today-date">(F, 21)</p>
-            </div>
+            <button class="header-menu-btn" id="current-page"><i class="bi bi-calendar-day"></i>Today</button>
+            <button class="header-menu-btn"><i class="bi bi-clock-history"></i>History</button>
             <div class="temperature-type-block">
                 <button class="temperature-type-btn" id="current-temp-type">°C</button>
                 <button class="temperature-type-btn">°F</button>
             </div>
             <div class="logo-block">
-                <p>Weath.io</p>
-                <img src="https://cdn-icons-png.flaticon.com/512/5579/5579975.png" alt="">
+                <div class="logo-block-title">
+                    <p>Weath.io</p>
+                    <span class="today-date">by Stuxlut</span>
+                </div>
+                <img src="img/logo.png" alt="">
             </div>
         </div>
         <div class="saved-locations-block">
@@ -65,7 +66,7 @@
             <div class="saved-locations-items">
                 <div class="saved-locations-item" id="saved-location-none">
                     <p class="saved-locations-name">None</p>
-                    <i class="fa-solid fa-circle-plus"></i>
+                    <i class="bi bi-plus-square"></i>
                     <button class="saved-location-search" style="display: none"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
                 <!-- <div class="saved-locations-item">

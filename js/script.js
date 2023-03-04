@@ -1,3 +1,5 @@
+'use strict';
+
 const search = document.querySelector(".search");
 const searchInput = document.querySelector(".search-input");
 const clearSearch = document.querySelector(".clear-search");
@@ -23,9 +25,14 @@ let savedLocationOption = {
     country: '',
     id: 0
 }
+let searchHistoryItem = {
+    location: '',
+    country: ''
+}
 let user = {
     savedLocations: [],
-    temperatureType: ''
+    temperatureType: '',
+    searchHistory: []
 }
 
 if (localStorage.getItem('user')) {
@@ -97,6 +104,9 @@ if (localStorage.getItem('user')) {
 
             savedLocationsList.appendChild(savedItem);
         }
+        for (let i = 0; i < parsedRequiredUser.searchHistory.length; i++){
+            // Load search history items (list)
+        }
     }
 } else {
     let newUser = Object.assign({}, user);
@@ -115,11 +125,6 @@ function checkTime(num) {
     }
     return num;
 }
-
-// function removeObjFromArray(arr, value) {
-//     arr = arr.filter(item => item.location != value);
-//     return arr;
-// }
 
 function searchWeather() {
     const APIKey = "584ca977c587314c7e2a79863cea8226";
@@ -455,3 +460,13 @@ const logo = document.querySelector(".logo-block img");
 logo.ondragstart = () => {
     return false;
 };
+
+const otherInfoHeader = document.querySelector('.other-info');
+
+function showHistoryPage() {
+    otherInfoHeader.style.display = 'none';
+}
+
+function hideHistoryPage() {
+    otherInfoHeader.style.display = 'flex';
+}
