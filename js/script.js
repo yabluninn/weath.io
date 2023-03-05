@@ -27,7 +27,8 @@ let savedLocationOption = {
 }
 let searchHistoryItem = {
     location: '',
-    country: ''
+    country: '',
+    time: 0
 }
 let user = {
     savedLocations: [],
@@ -118,6 +119,27 @@ updateSavedLocationsCount();
 
 const todayDate = document.querySelector(".today-date");
 todayDate.innerHTML = "(" + moment().format('LL') + ")";
+
+const infoBlock = document.querySelector('.info-block');
+const historyBlock = document.querySelector('.history-block');
+const mainPageButton = document.querySelector('.main-menu-btn');
+const historyPageButton = document.querySelector('.history-menu-btn');
+
+function showMainPage() {
+    infoBlock.style.display = 'flex';
+    historyBlock.style.display = 'none';
+    mainPageButton.id = 'current-page';
+    historyPageButton.id = '';
+}
+
+function showHistoryPage() {
+    infoBlock.style.display = 'none';
+    historyBlock.style.display = 'flex';
+    mainPageButton.id = '';
+    historyPageButton.id = 'current-page';
+}
+
+showHistoryPage();
 
 function checkTime(num) {
     if (num < 10) {
@@ -273,6 +295,7 @@ function searchWeather() {
             // cloudinessItem.addEventListener("click", function() { copyDetailsToClipboard(`Cloudiness in ${city} (${json.sys.country}) : ${json.clouds.all} %`, cloudinessItem) });
             // pressureItem.addEventListener("click", function() { copyDetailsToClipboard(`Cloudiness in ${city} (${json.sys.country}) : ${json.main.pressure} hPa`, cloudinessItem) });
 
+            //ADD HISTORY ITEM with parameters (time, locationName, country)
         });
 }
 
@@ -460,13 +483,3 @@ const logo = document.querySelector(".logo-block img");
 logo.ondragstart = () => {
     return false;
 };
-
-const otherInfoHeader = document.querySelector('.other-info');
-
-function showHistoryPage() {
-    otherInfoHeader.style.display = 'none';
-}
-
-function hideHistoryPage() {
-    otherInfoHeader.style.display = 'flex';
-}
