@@ -28,7 +28,7 @@ let savedLocationOption = {
 let searchHistoryItem = {
     location: '',
     country: '',
-    time: 0
+    time: ''
 }
 let user = {
     savedLocations: [],
@@ -105,8 +105,50 @@ if (localStorage.getItem('user')) {
 
             savedLocationsList.appendChild(savedItem);
         }
+    }
+    if (parsedRequiredUser.searchHistory.length === 0) {
+        const nothingHistoryBlock = document.querySelector('.history-nothing-block');
+        nothingHistoryBlock.style.display = "flex";
+    } else if (parsedRequiredUser.searchHistory.length > 0){
+        const nothingHistoryBlock = document.querySelector('.history-nothing-block');
+        nothingHistoryBlock.style.display = "none";
         for (let i = 0; i < parsedRequiredUser.searchHistory.length; i++){
-            // Load search history items (list)
+            const historyList = document.querySelector('.history-items');
+            const historyItem = document.createElement("div");
+            historyItem.className = "history-item";
+
+            const historyTime = document.createElement("p");
+            historyTime.className = "history-time";
+            historyTime.textContent = parsedRequiredUser.searchHistory[i].time;
+            historyItem.appendChild(historyTime);
+
+            const historyLocation = document.createElement("div");
+            historyLocation.className = "history-location";
+
+            const historyLocationFlag = document.createElement("img");
+            historyLocationFlag.className = "history-flag";
+            const countryCode = parsedRequiredUser.searchHistory[i].country;
+            const countryFlagURL = `https://flagsapi.com/${countryCode}/flat/64.png`;
+            historyLocationFlag.src = countryFlagURL;
+            historyLocation.appendChild(historyLocationFlag);
+            const historyLocationName = document.createElement("p");
+            historyLocationName.className = "history-location-name";
+            historyLocationName.textContent = parsedRequiredUser.searchHistory[i].location;
+            historyLocation.appendChild(historyLocationName);
+            historyItem.appendChild(historyLocation);
+
+            const historySearchButton = document.createElement("button");
+            historySearchButton.className = "history-search-btn";
+            const historySearchButtonIcon = document.createElement("i");
+            historySearchButtonIcon.className = "bi bi-search";
+            historySearchButton.appendChild(historySearchButtonIcon);
+            $(historySearchButton).on("click", function() {
+                searchInput.value = historyLocationName.textContent;
+                searchWeather();
+            });
+            historyItem.appendChild(historySearchButton);
+
+            historyList.appendChild(historyItem);
         }
     }
 } else {
@@ -125,11 +167,14 @@ const historyBlock = document.querySelector('.history-block');
 const mainPageButton = document.querySelector('.main-menu-btn');
 const historyPageButton = document.querySelector('.history-menu-btn');
 
+const clearSearchButton = document.querySelector('.clear-history-btn');
+
 function showMainPage() {
     infoBlock.style.display = 'flex';
     historyBlock.style.display = 'none';
     mainPageButton.id = 'current-page';
     historyPageButton.id = '';
+    $(clearSearchButton).off("click");
 }
 
 function showHistoryPage() {
@@ -137,9 +182,32 @@ function showHistoryPage() {
     historyBlock.style.display = 'flex';
     mainPageButton.id = '';
     historyPageButton.id = 'current-page';
+    $(clearSearchButton).on("click", function () {
+        clearHistory();
+    });
 }
 
-showHistoryPage();
+$(mainPageButton).on("click", function () {
+    showMainPage();
+});
+$(historyPageButton).on("click", function () {
+    showHistoryPage();
+});
+
+showMainPage();
+
+function clearHistory(){
+    const historyList = document.querySelector('.history-items');
+    historyList.replaceChildren(); // Remove all children
+    let requiredUser = localStorage.getItem('user');
+    let parsedRequiredUser = JSON.parse(requiredUser);
+
+    parsedRequiredUser.searchHistory = [];
+
+    localStorage.setItem('user', JSON.stringify(parsedRequiredUser));
+    const nothingHistoryBlock = document.querySelector('.history-nothing-block');
+    nothingHistoryBlock.style.display = "flex";
+}
 
 function checkTime(num) {
     if (num < 10) {
@@ -289,13 +357,8 @@ function searchWeather() {
             $(pressureItem).on("click", function() {
                 copyDetailsToClipboard(`Pressure in ${city} (${json.sys.country}) : ${json.main.pressure} hPa`, pressureItem)
             });
-            // humidityItem.addEventListener("click", function() { copyDetailsToClipboard(`Humidity in ${city} (${json.sys.country}) : ${json.main.humidity} %`, humidityItem) });
-            // windSpeedItem.addEventListener("click", function() { copyDetailsToClipboard(`Wind speed in ${city} (${json.sys.country}) : ${json.wind.speed} km/h`, windSpeedItem) });
-            // visibilityItem.addEventListener("click", function() { copyDetailsToClipboard(`Visibility in ${city} (${json.sys.country}) : ${visibilityValue} km`, visibilityItem) });
-            // cloudinessItem.addEventListener("click", function() { copyDetailsToClipboard(`Cloudiness in ${city} (${json.sys.country}) : ${json.clouds.all} %`, cloudinessItem) });
-            // pressureItem.addEventListener("click", function() { copyDetailsToClipboard(`Cloudiness in ${city} (${json.sys.country}) : ${json.main.pressure} hPa`, cloudinessItem) });
-
-            //ADD HISTORY ITEM with parameters (time, locationName, country)
+            let time = moment().format('LLL');;
+            addToHistory(time, city, countryCode);
         });
 }
 
@@ -305,8 +368,6 @@ $(search).on("click", function() {
 $(clearSearch).on("click", function() {
     clearSearchInput();
 });
-// search.addEventListener("click", searchWeather);
-// clearSearch.addEventListener("click", clearSearchInput);
 
 const savedLocationsList = document.querySelector(".saved-locations-list");
 
@@ -477,6 +538,66 @@ function copyDetailsToClipboard(text, buttonObj) {
     setTimeout(function() {
         clipboardIcon.className = "bi bi-clipboard-fill";
     }, 1500);
+}
+
+function addToHistory(time, name, countryCode) { 
+    let requiredUser = localStorage.getItem('user');
+    let parsedRequiredUser = JSON.parse(requiredUser);
+    if (searchInput.value === "") return;
+
+    if (parsedRequiredUser.searchHistory.length === 0) {
+        const nothingHistoryBlock = document.querySelector('.history-nothing-block');
+        nothingHistoryBlock.style.display = "none";
+    }
+    if (parsedRequiredUser.searchHistory.length < 10 || parsedRequiredUser.searchHistory.length === 10) {
+        const historyList = document.querySelector('.history-items');
+        if (parsedRequiredUser.searchHistory.length === 10){
+            parsedRequiredUser.searchHistory.shift();
+            historyList.removeChild(historyList.firstElementChild);
+        }
+        const historyItem = document.createElement("div");
+        historyItem.className = "history-item";
+
+        const historyTime = document.createElement("p");
+        historyTime.className = "history-time";
+        historyTime.textContent = time;
+        historyItem.appendChild(historyTime);
+
+        const historyLocation = document.createElement("div");
+        historyLocation.className = "history-location";
+
+        const historyLocationFlag = document.createElement("img");
+        historyLocationFlag.className = "history-flag";
+        const imgFullURL = document.querySelector(".weather-mi-footer img").src;
+        historyLocationFlag.src = imgFullURL;
+        historyLocation.appendChild(historyLocationFlag);
+        const historyLocationName = document.createElement("p");
+        historyLocationName.className = "history-location-name";
+        historyLocationName.textContent = name;
+        historyLocation.appendChild(historyLocationName);
+        historyItem.appendChild(historyLocation);
+
+        const historySearchButton = document.createElement("button");
+        historySearchButton.className = "history-search-btn";
+        const historySearchButtonIcon = document.createElement("i");
+        historySearchButtonIcon.className = "bi bi-search";
+        historySearchButton.appendChild(historySearchButtonIcon);
+        $(historySearchButton).on("click", function() {
+            searchInput.value = historyLocationName.textContent;
+            searchWeather();
+        });
+        historyItem.appendChild(historySearchButton);
+
+        historyList.appendChild(historyItem);
+
+        let searchHistoryObj = Object.assign({}, searchHistoryItem);
+        searchHistoryObj.location = name;
+        searchHistoryObj.country = countryCode;
+        searchHistoryObj.time = time;
+
+        parsedRequiredUser.searchHistory.push(searchHistoryObj);
+        localStorage.setItem('user', JSON.stringify(parsedRequiredUser));
+    }
 }
 
 const logo = document.querySelector(".logo-block img");

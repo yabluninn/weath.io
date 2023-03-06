@@ -242,7 +242,7 @@ button:hover {
     flex-direction: row;
     width: 130px;
     height: 80px;
-    margin-left: 290px;
+    margin-left: 390px;
 }
 
 .temperature-type-block button {
@@ -554,16 +554,15 @@ button:hover {
     justify-content: start;
     align-items: center;
     flex-direction: column;
-    border: 1px solid;
 }
 .history-list-block {
     width: 100%;
-    height: fit-content;
+    height: 610px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: start;
-    margin-top: 20px;
+    padding-top: 20px;
 }
 
 .history-items{
@@ -573,7 +572,6 @@ button:hover {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border: 1px solid;
     margin-left: 35px;
     margin-top: 10px;
 }
@@ -589,26 +587,33 @@ button:hover {
     justify-content: space-between;
     align-items: center;
     margin-top: 10px;
+    transition: all 0.4s;
+}
+
+.history-item:hover{
+    transform: scale(0.95, 1);
 }
 
 .history-time{
-    margin-left: 20px;
-    font-size: 18px;
+    margin-left: 10px;
+    font-size: 15px;
 }
 .history-location{
+    width: 250px;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     flex-direction: row;
+    margin-right: 80px;
 }
 .history-location-name{
     font-size: 22px;
+    margin-left: 15px;
 }
 
 .history-flag{
     width: 45px;
     height: 45px;
-    margin-left: 15px;
 }
 
 .history-search-btn{
@@ -621,6 +626,58 @@ button:hover {
     margin-right: 10px;
 }
 
+.history-nothing-block{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.history-nothing-item{
+    border: 1px solid;
+    border-bottom: 3px solid;
+    border-radius: 18px;
+    background-color: white;
+    width: 400px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.history-nothing-item i{
+    font-size: 75px;
+}
+.history-nothing-item p{
+    font-size: 35px;
+    margin-top: 15px;
+}
+.clear-history-block{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+.clear-history-btn{
+    width: 200px;
+    height: 40px;
+    border: 1px solid;
+    border-bottom: 3px solid;
+    border-radius: 18px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: transparent;
+    transition: all 0.4s;
+}
+.clear-history-btn:hover{
+    transform: scale(0.8);
+    background-color: #ffb700;
+}
+.clear-history-btn i{
+    font-size: 20px;
+    margin-right: 15px;
+}
 #transparent {
     opacity: 0;
 }
