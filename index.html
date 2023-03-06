@@ -33,7 +33,8 @@
             </div>
             <div class="weather-mi-footer">
                 <img src="https://cdn-icons-png.flaticon.com/512/330/330459.png" alt="">
-                <button class="save-button"><i class="bi bi-cloud-download"></i>Save</button>
+                <button class="save-button" title="Save location"><i class="bi bi-bookmarks"></i></button>
+                <button class="star-button" title="Set location as Favorite"><i class="bi bi-star"></i></button>
             </div>
         </div>
         <div class="error-block" id="notfound">
@@ -80,63 +81,94 @@
                     </div> -->
                 </div>
             </div>
-            <div class="weather-highlights-block">
-                <p class="subtitle"><i class="bi bi-grid-1x2-fill"></i>&nbsp;&nbsp;&nbsp;Today's Highlights</p>
-                <div class="highlights-items">
-                    <div class="highlights-item">
-                        <div class="highlights-item-part">
-                            <p class="highlights-item-title">Humidity</p>
-                            <p class="highlights-item-text" id="humidity">- <span>%</span></p>
-                            <p class="status">High&nbsp;</p>
+            <div class="weather-highlights-container">
+                <div class="weather-starred-location">
+                    <p class="subtitle"><i class="bi bi-star-fill"></i>&nbsp;&nbsp;&nbsp;Favorite Location</p>
+                    <div class="starred-location-block">
+                        <div class="starred-location-nothing">
+                            <i class="bi bi-star"></i>
+                            <p>Nothing here</p>
                         </div>
-                        <!-- <i class="bi bi-water"></i> -->
-                        <img src="https://cdn-icons-png.flaticon.com/512/4005/4005831.png" alt="">
-                        <button class="copyButton humidityItem"><i class="bi bi-clipboard-fill"></i></button>
+                        <div class="starred-location">
+                            <div class="starred-location-name-block">
+                                <img src="https://flagsapi.com/US/flat/64.png" alt="Flag" class="starred-location-img">
+                                <p class="starred-location-name">Location</p>
+                            </div>
+                            <img src="https://cdn-icons-png.flaticon.com/512/4064/4064276.png" alt="Weather icon" class="starred-location-weather-img">
+                            <div class="starred-location-info-block">
+                                <p class="starred-location-temperature">15<span>°C</span></p>
+                                <p class="starred-location-description"><i class="fa-solid fa-cloud"></i>&nbsp;&nbsp;&nbsp;&nbsp;Clouds</p>
+                            </div>
+                            <div class="starred-location-buttons">
+                                <button class="search-starred-location-btn"><i class="bi bi-search"></i></button>
+                                <button class="remove-starred-location-btn"><i class="bi bi-trash"></i></button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="highlights-item">
-                        <div class="highlights-item-part">
-                            <p class="highlights-item-title">Wind Speed</p>
-                            <p class="highlights-item-text" id="windspeed">- <span>km/h</span></p>
-                            <p class="status">High&nbsp;</p>
+                </div>
+                <div class="weather-highlights-block">
+                    <p class="subtitle highlights-subtitle"><i class="bi bi-grid-1x2-fill"></i>&nbsp;&nbsp;&nbsp;Today's Highlights</p>
+                    <div class="highlights-items">
+                        <div class="highlights-items-container">
+                            <div class="highlights-item" id="height-two-els">
+                                <div class="highlights-item-part">
+                                    <p class="highlights-item-title">Humidity</p>
+                                    <p class="highlights-item-text" id="humidity">- <span>%</span></p>
+                                    <!-- <p class="status">High&nbsp;</p> -->
+                                </div>
+                                <img src="https://cdn-icons-png.flaticon.com/512/4005/4005831.png" alt="">
+                                <button class="copyButton humidityItem"><i class="bi bi-clipboard-fill"></i></button>
+                            </div>
+                            <div class="highlights-item" id="height-two-els">
+                                <div class="highlights-item-part">
+                                    <p class="highlights-item-title">Wind Speed</p>
+                                    <p class="highlights-item-text" id="windspeed">- <span>km/h</span></p>
+                                    <!-- <p class="status">High&nbsp;</p> -->
+                                </div>
+                                <img src="https://cdn-icons-png.flaticon.com/512/4005/4005828.png" alt="">
+                                <button class="copyButton windspeedItem"><i class="bi bi-clipboard-fill"></i></button>
+                            </div>
                         </div>
-                        <img src="https://cdn-icons-png.flaticon.com/512/4005/4005828.png" alt="">
-                        <button class="copyButton windspeedItem"><i class="bi bi-clipboard-fill"></i></button>
-                    </div>
-                    <div class="highlights-item">
-                        <div class="highlights-item-part">
-                            <p class="highlights-item-title">Visibility</p>
-                            <p class="highlights-item-text" id="visibility">- <span>km</span></p>
-                            <p class="status">Good&nbsp;</p>
+                        <div class="highlights-items-container">
+                            <div class="highlights-item" id="height-one-el">
+                                <div class="highlights-item-part">
+                                    <p class="highlights-item-title">Air Quality</p>
+                                    <p class="highlights-item-text">-</p>
+                                    <p class="status">Moderate&nbsp;</p>
+                                </div>
+                                <img src="https://cdn-icons-png.flaticon.com/512/5029/5029184.png" alt="">
+                                <button class="copyButton"><i class="bi bi-clipboard-fill"></i></button>
+                            </div>
                         </div>
-                        <img src="https://cdn-icons-png.flaticon.com/512/4005/4005908.png" alt="">
-                        <button class="copyButton visibilityItem"><i class="bi bi-clipboard-fill"></i></button>
-                    </div>
-                    <div class="highlights-item">
-                        <div class="highlights-item-part">
-                            <p class="highlights-item-title">Cloudiness</p>
-                            <p class="highlights-item-text" id="cloudiness">- <span>%</span></p>
-                            <p class="status">Good&nbsp;</p>
+                        <div class="highlights-items-container">
+                            <div class="highlights-item" id="height-two-els">
+                                <div class="highlights-item-part">
+                                    <p class="highlights-item-title">Visibility</p>
+                                    <p class="highlights-item-text" id="visibility">- <span>km</span></p>
+                                </div>
+                                <img src="https://cdn-icons-png.flaticon.com/512/4005/4005908.png" alt="">
+                                <button class="copyButton visibilityItem"><i class="bi bi-clipboard-fill"></i></button>
+                            </div>
+                            <div class="highlights-item" id="height-two-els">
+                                <div class="highlights-item-part">
+                                    <p class="highlights-item-title">Cloudiness</p>
+                                    <p class="highlights-item-text" id="cloudiness">- <span>%</span></p>
+                                </div>
+                                <img src="https://cdn-icons-png.flaticon.com/512/4005/4005883.png" alt="">
+                                <button class="copyButton cloudinessItem"><i class="bi bi-clipboard-fill"></i></button>
+                            </div>
                         </div>
-                        <img src="https://cdn-icons-png.flaticon.com/512/4005/4005883.png" alt="">
-                        <button class="copyButton cloudinessItem"><i class="bi bi-clipboard-fill"></i></button>
-                    </div>
-                    <div class="highlights-item">
-                        <div class="highlights-item-part">
-                            <p class="highlights-item-title">Air Quality</p>
-                            <p class="highlights-item-text">-</p>
-                            <p class="status">Moderate&nbsp;</p>
+                        <div class="highlights-items-container">
+                            <div class="highlights-item" id="height-one-el">
+                                <div class="highlights-item-part">
+                                    <p class="highlights-item-title">Pressure</p>
+                                    <p class="highlights-item-text" id="pressure">- <span>hPa</span></p>
+                                    <p class="status">Good&nbsp;</p>
+                                </div>
+                                <img src="https://cdn-icons-png.flaticon.com/512/4005/4005925.png" alt="">
+                                <button class="copyButton pressureItem"><i class="bi bi-clipboard-fill"></i></button>
+                            </div>
                         </div>
-                        <img src="https://cdn-icons-png.flaticon.com/512/5029/5029184.png" alt="">
-                        <button class="copyButton"><i class="bi bi-clipboard-fill"></i></button>
-                    </div>
-                    <div class="highlights-item">
-                        <div class="highlights-item-part">
-                            <p class="highlights-item-title">Pressure</p>
-                            <p class="highlights-item-text" id="pressure">- <span>hPa</span></p>
-                            <p class="status">Good&nbsp;</p>
-                        </div>
-                        <img src="https://cdn-icons-png.flaticon.com/512/4005/4005925.png" alt="">
-                        <button class="copyButton pressureItem"><i class="bi bi-clipboard-fill"></i></button>
                     </div>
                 </div>
             </div>

@@ -63,10 +63,16 @@ that the user is looking for);
 - Redesigned "header" block;
 - Redesigned all "header" buttons;
 - Redesigned all "highlight" items;
-- Added "search history" button;
 
+- Added "search history" button;
 - Added "search history" block;
 - Added search history system to weather app:
     Users can see last 10 locations which they searched;
     Users can search faster any location which they searched earlier;
     Users can clear all search history;
+
+- Added "favorite location" block;
+- Added "favorite location" feature:
+    Now users can set any one location as favorite and get main and useful information within a second;
+
+- Added searched city to title "Today's Highlights" to display which location was searched right now;

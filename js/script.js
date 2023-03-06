@@ -1,5 +1,7 @@
 'use strict';
 
+const APIKey = "584ca977c587314c7e2a79863cea8226";
+
 const search = document.querySelector(".search");
 const searchInput = document.querySelector(".search-input");
 const clearSearch = document.querySelector(".clear-search");
@@ -19,6 +21,16 @@ const temperatureTypeButtons = document.querySelector('.temperature-type-block')
 const celsiumButton = temperatureTypeButtons.firstElementChild;
 const fahrenheitButton = temperatureTypeButtons.lastElementChild;
 
+const noneFavLocation = document.querySelector('.starred-location-nothing');
+const favLocation = document.querySelector('.starred-location');
+const favLocationFlag = document.querySelector('.starred-location-img');
+const favLocationName = document.querySelector('.starred-location-name');
+const favLocationDescription = document.querySelector('.starred-location-description');
+const favLocationTemperature = document.querySelector('.starred-location-temperature');
+const favLocationWeatherIcon = document.querySelector('.starred-location-weather-img');
+const favLocationSearchButton = document.querySelector('.search-starred-location-btn');
+const favLocationRemoveButton = document.querySelector('.remove-starred-location-btn');
+
 let defaultTemperatureType = 'C';
 let savedLocationOption = {
     location: '',
@@ -33,7 +45,8 @@ let searchHistoryItem = {
 let user = {
     savedLocations: [],
     temperatureType: '',
-    searchHistory: []
+    searchHistory: [],
+    favoriteLocation: ''
 }
 
 if (localStorage.getItem('user')) {
@@ -151,6 +164,16 @@ if (localStorage.getItem('user')) {
             historyList.appendChild(historyItem);
         }
     }
+    if (parsedRequiredUser.favoriteLocation != ''){
+        const updateFavWeather = () => {
+            let location = parsedRequiredUser.favoriteLocation;
+            getFavoriteWeatherData(location, parsedRequiredUser);
+            localStorage.setItem('user', JSON.stringify(parsedRequiredUser));
+            let intervalMins = 30; // Each 30 minutes
+            let intervalMs = intervalMins * 60 * 1000;
+            setTimeout(updateFavWeather, intervalMs);
+        } 
+    }
 } else {
     let newUser = Object.assign({}, user);
     newUser.temperatureType = defaultTemperatureType;
@@ -175,6 +198,27 @@ function showMainPage() {
     mainPageButton.id = 'current-page';
     historyPageButton.id = '';
     $(clearSearchButton).off("click");
+    let requiredUser = localStorage.getItem('user');
+    let parsedRequiredUser = JSON.parse(requiredUser);
+    if (parsedRequiredUser.favoriteLocation != ''){
+        if (parsedRequiredUser.favoriteLocation === ''){
+            noneFavLocation.style.display = 'flex';
+            favLocation.style.display = 'none';
+        }else if (parsedRequiredUser.favoriteLocation != ''){
+            noneFavLocation.style.display = 'none';
+            favLocation.style.display = 'flex';
+            let location = parsedRequiredUser.favoriteLocation;
+            getFavoriteWeatherData(location, parsedRequiredUser);
+            localStorage.setItem('user', JSON.stringify(parsedRequiredUser));
+            $(favLocationSearchButton).on("click", function () {
+                searchInput.value = parsedRequiredUser.favoriteLocation;
+                searchWeather();
+            });
+            $(favLocationRemoveButton).on("click", function () {
+                removeFavoriteLocation(parsedRequiredUser);
+            });
+        }
+    }
 }
 
 function showHistoryPage() {
@@ -217,7 +261,6 @@ function checkTime(num) {
 }
 
 function searchWeather() {
-    const APIKey = "584ca977c587314c7e2a79863cea8226";
     const tempCity = searchInput.value;
 
     const city = S(tempCity).capitalize().s;
@@ -287,16 +330,15 @@ function searchWeather() {
 
             cityName.innerHTML = city;
 
+            let requiredUser = localStorage.getItem('user');
+            let parsedRequiredUser = JSON.parse(requiredUser);
+
             $(celsiumButton).on("click", function() {
                 changeTemperatureType('C', json.main.temp);
             });
             $(fahrenheitButton).on("click", function() {
                 changeTemperatureType('F', json.main.temp);
             });
-            // celsiumButton.addEventListener("click", function() { changeTemperatureType('C', json.main.temp) });
-            // fahrenheitButton.addEventListener("click", function() { changeTemperatureType('F', json.main.temp) });
-            let requiredUser = localStorage.getItem('user');
-            let parsedRequiredUser = JSON.parse(requiredUser);
             if (parsedRequiredUser.temperatureType === 'C') {
                 changeTemperatureType('C', json.main.temp);
             } else if (parsedRequiredUser.temperatureType === 'F') {
@@ -359,6 +401,18 @@ function searchWeather() {
             });
             let time = moment().format('LLL');;
             addToHistory(time, city, countryCode);
+
+            const highlightsSubtitle = document.querySelector('.highlights-subtitle');
+            highlightsSubtitle.innerHTML = `<i class="bi bi-grid-1x2-fill"></i>&nbsp;&nbsp;&nbsp;Today's Highlights&nbsp;&nbsp; (${city})`;
+
+            const setFavLocationButton = document.querySelector('.star-button');
+            $(setFavLocationButton).off("click");
+            $(setFavLocationButton).on("click", function () {
+                setLocationAsFavorite(city);
+            });
+
+            $('search').off("click");
+            $(favLocationSearchButton).off("click");
         });
 }
 
@@ -504,6 +558,8 @@ function clearSearchInput() {
     cloudiness.innerHTML = "-<span> %</span>";
     pressure.innerHTML = "-<span> hPa</span>";
 
+    $('.star-button').off("click");
+
     // const saveButton = document.querySelector(".save-button");
     // saveButton.removeEventListener("click", saveLocation, true);
 }
@@ -599,6 +655,89 @@ function addToHistory(time, name, countryCode) {
         localStorage.setItem('user', JSON.stringify(parsedRequiredUser));
     }
 }
+
+function setLocationAsFavorite(name){
+    let requiredUser = localStorage.getItem('user');
+    let parsedRequiredUser = JSON.parse(requiredUser);
+    if (parsedRequiredUser.favoriteLocation === ''){
+        parsedRequiredUser.favoriteLocation = name;
+        noneFavLocation.style.display = 'none';
+        favLocation.style.display = 'flex';
+        getFavoriteWeatherData(name, parsedRequiredUser);
+        localStorage.setItem('user', JSON.stringify(parsedRequiredUser));
+        $(favLocationRemoveButton).on("click", function () {
+            removeFavoriteLocation(parsedRequiredUser);
+        });
+    }
+}
+
+function getFavoriteWeatherData(name, user){
+    fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${name}&units=metric&appid=${APIKey}`
+    )
+    .then((response) => response.json())
+    .then((json) => {
+        favLocationWeatherIcon.ondragstart = () => {
+            return false;
+        };
+
+        switch (json.weather[0].main) {
+            case "Clear":
+                favLocationWeatherIcon.src = "https://cdn-icons-png.flaticon.com/512/4064/4064276.png";
+                break;
+
+            case "Rain":
+                favLocationWeatherIcon.src = "https://cdn-icons-png.flaticon.com/512/4064/4064361.png";
+                break;
+
+            case "Snow":
+                favLocationWeatherIcon.src = "https://cdn-icons-png.flaticon.com/512/4064/4064317.png";
+                break;
+
+            case "Clouds":
+                favLocationWeatherIcon.src = "https://cdn-icons-png.flaticon.com/512/4064/4064269.png";
+                break;
+
+            case "Haze":
+                favLocationWeatherIcon.src = "https://cdn-icons-png.flaticon.com/512/4064/4064311.png";
+                break;
+
+            case "Mist":
+                favLocationWeatherIcon.src = "https://cdn-icons-png.flaticon.com/512/4064/4064445.png";
+                break;
+
+            default:
+                favLocationWeatherIcon.src = "";
+        }
+        const countryCode = String(json.sys.country);
+        const countryFlagURL = `https://flagsapi.com/${countryCode}/flat/64.png`;
+        favLocationFlag.src = countryFlagURL;
+
+        favLocationName.textContent = name;
+        favLocationDescription.innerHTML = `<i class="fa-solid fa-cloud"></i>&nbsp;&nbsp;&nbsp;&nbsp;${json.weather[0].main}`;
+
+        if (user.temperatureType === 'C') {
+            // changeTemperatureType('C', json.main.temp);
+            if (user.favoriteLocation != ''){
+                favLocationTemperature.innerHTML = `${parseInt(json.main.temp)}<span>°C</span>`;
+            }
+        } else if (user.temperatureType === 'F') {
+            // changeTemperatureType('F', json.main.temp);
+            const fahrenheit = ((json.main.temp * 9) / 5) + 32;
+            if (user.favoriteLocation != ''){
+                favLocationTemperature.innerHTML = `${parseInt(fahrenheit)}<span>°F</span>`;
+            }
+        }
+    });
+}
+
+function removeFavoriteLocation(user) { 
+    user.favoriteLocation = '';
+    localStorage.setItem('user', JSON.stringify(user));
+    noneFavLocation.style.display = 'flex';
+    favLocation.style.display = 'none';
+    $(favLocationRemoveButton).off("click");
+ }
 
 const logo = document.querySelector(".logo-block img");
 logo.ondragstart = () => {
