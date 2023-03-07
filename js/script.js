@@ -49,6 +49,9 @@ let user = {
     favoriteLocation: ''
 }
 
+const highlightsSubtitle = document.querySelector('.highlights-subtitle');
+highlightsSubtitle.innerHTML = `<i class="bi bi-grid-1x2-fill"></i>&nbsp;&nbsp;&nbsp;Today's Highlights&nbsp;&nbsp;`;
+
 if (localStorage.getItem('user')) {
     let requiredUser = localStorage.getItem('user');
     let parsedRequiredUser = JSON.parse(requiredUser);
@@ -402,7 +405,6 @@ function searchWeather() {
             let time = moment().format('LLL');;
             addToHistory(time, city, countryCode);
 
-            const highlightsSubtitle = document.querySelector('.highlights-subtitle');
             highlightsSubtitle.innerHTML = `<i class="bi bi-grid-1x2-fill"></i>&nbsp;&nbsp;&nbsp;Today's Highlights&nbsp;&nbsp; (${city})`;
 
             const setFavLocationButton = document.querySelector('.star-button');
@@ -556,7 +558,9 @@ function clearSearchInput() {
     windSpeed.innerHTML = "-<span> km/h</span>";
     visibility.innerHTML = "-<span> km</span>";
     cloudiness.innerHTML = "-<span> %</span>";
-    pressure.innerHTML = "-<span> hPa</span>";
+    pressure.innerHTML = "- <span> hPa</span>";
+
+    highlightsSubtitle.innerHTML = `<i class="bi bi-grid-1x2-fill"></i>&nbsp;&nbsp;&nbsp;Today's Highlights&nbsp;&nbsp;`;
 
     $('.star-button').off("click");
 

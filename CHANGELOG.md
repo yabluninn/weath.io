@@ -76,3 +76,5 @@ that the user is looking for);
     Now users can set any one location as favorite and get main and useful information within a second;
 
 - Added searched city to title "Today's Highlights" to display which location was searched right now;
+- Redesigned "search input" block;
+- Redesigned "saved location" buttons;
