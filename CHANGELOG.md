@@ -78,3 +78,8 @@ that the user is looking for);
 - Added searched city to title "Today's Highlights" to display which location was searched right now;
 - Redesigned "search input" block;
 - Redesigned "saved location" buttons;
+
+[v.1.3-08.02.2023]:
+=======================================================================================================================================================================
+- Added notifications system;
+- Added notification popups (Three types: Success, warning and error);

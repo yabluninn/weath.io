@@ -254,6 +254,7 @@ function clearHistory(){
     localStorage.setItem('user', JSON.stringify(parsedRequiredUser));
     const nothingHistoryBlock = document.querySelector('.history-nothing-block');
     nothingHistoryBlock.style.display = "flex";
+    showToast("History was cleared!", "Success");
 }
 
 function checkTime(num) {
@@ -269,7 +270,10 @@ function searchWeather() {
     const city = S(tempCity).capitalize().s;
     // const city = tempCity.charAt(0).toUpperCase() + tempCity.slice(1);
 
-    if (tempCity === "") return;
+    if (tempCity === ""){
+        showToast("Enter location name first!", "Error");
+        return;
+    }
 
     fetch(
             `https://api.openweathermap.org/data/2.5/weather?q=${tempCity}&units=metric&appid=${APIKey}`
@@ -672,6 +676,10 @@ function setLocationAsFavorite(name){
         $(favLocationRemoveButton).on("click", function () {
             removeFavoriteLocation(parsedRequiredUser);
         });
+        showToast("Successfully added favorite location!", "Success");
+    }
+    else{
+        showToast("You already have favorite location!", "Error");
     }
 }
 
@@ -741,6 +749,48 @@ function removeFavoriteLocation(user) {
     noneFavLocation.style.display = 'flex';
     favLocation.style.display = 'none';
     $(favLocationRemoveButton).off("click");
+    showToast("Successfully removed location!", "Success");
+ }
+
+const toastBox = document.querySelector('.toast-container');
+function showToast(message, type){
+    const toast = document.createElement("div");
+    toast.className = 'toast-item';
+    const toastIcon = document.createElement("i");
+    const toastProgressBar = document.createElement("div");
+    toastProgressBar.className = 'toast-progressbar';
+    switch (type){
+        case "Success":
+            toastIcon.className = 'bi bi-check-circle-fill';
+            toastIcon.style.color = 'green';
+            toastProgressBar.style.background = 'green';
+            break;
+        case "Warning":
+            toastIcon.className = 'bi bi-exclamation-triangle-fill';
+            toastIcon.style.color = 'yellow';
+            toastProgressBar.style.background = 'yellow';
+            break;
+        case "Error":
+            toastIcon.className = 'bi bi-exclamation-octagon-fill';
+            toastIcon.style.color = 'red';
+            toastProgressBar.style.background = 'red';
+            break;
+    }
+    toast.appendChild(toastIcon);
+    const toastMessageBlock = document.createElement("div");
+    toastMessageBlock.className = 'toast-message-block';
+    const toastMessage = document.createElement("p");
+    toastMessage.className = 'toast-message';
+    toastMessage.textContent = `${message}`;
+    toastMessageBlock.appendChild(toastMessage);
+    toast.appendChild(toastMessageBlock);
+    toast.appendChild(toastProgressBar);
+
+    toastBox.appendChild(toast);
+
+    setTimeout(() => {
+        toast.remove();
+    }, 5000);
  }
 
 const logo = document.querySelector(".logo-block img");
