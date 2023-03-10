@@ -83,3 +83,9 @@ that the user is looking for);
 =======================================================================================================================================================================
 - Added notifications system;
 - Added notification popups (Three types: Success, warning and error);
+
+    Stuxlut Premium :
+    *Max saved locations (12, base: 6)
+    *Max history locations (30, base: 10)
+    *Air pollution data
+    *Unlimited search locations per day (base: 10)

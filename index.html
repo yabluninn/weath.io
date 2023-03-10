@@ -1,79 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/adaptive.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/adaptive.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
+    />
     <!-- <link rel="stylesheet" href="https://kit.fontawesome.com/96842691bc.css" crossorigin="anonymous"> -->
     <title>Weath.io</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <aside class="main-block">
-        <div class="input-block">
-            <input type="text" placeholder="Search for places..." class="search-input">
-            <div class="input-block-btns">
-                <button class="search"><i class="bi bi-search"></i></button>
-                <button class="clear-search"><i class="bi bi-x-lg"></i></button>
-            </div>
+      <div class="input-block">
+        <input
+          type="text"
+          placeholder="Search for places..."
+          class="search-input"
+        />
+        <div class="input-block-btns">
+          <button class="search"><i class="bi bi-search"></i></button>
+          <button class="clear-search"><i class="bi bi-x-lg"></i></button>
         </div>
-        <div class="weather-mi">
-            <img src="https://cdn-icons-png.flaticon.com/512/4064/4064276.png" alt="">
-            <p class="temperature dashboard-container-item-p">15<span>°C</span></p>
-            <p class="current-day">Tuesday,<span class="current-time"> 13:00</span></p>
-            <div class="weather-mi-description">
-                <p class="description"><i class="fa-solid fa-cloud"></i>&nbsp;&nbsp;&nbsp;&nbsp;Clouds</p>
-                <p class="rain-chance"><i class="fa-solid fa-umbrella"></i>&nbsp;&nbsp;&nbsp;&nbsp;Rain - 30%</p>
-            </div>
-            <div class="weather-mi-location">
-                <i class="bi bi-geo-alt-fill"></i>
-                <p class="location-name">Kiev</p>
-            </div>
-            <div class="weather-mi-footer">
-                <img src="https://cdn-icons-png.flaticon.com/512/330/330459.png" alt="">
-                <button class="save-button" title="Save location"><i class="bi bi-bookmarks"></i></button>
-                <button class="star-button" title="Set location as Favorite"><i class="bi bi-star"></i></button>
-            </div>
+      </div>
+      <div class="weather-mi">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/4064/4064276.png"
+          alt=""
+        />
+        <p class="temperature dashboard-container-item-p">15<span>°C</span></p>
+        <p class="current-day">
+          Tuesday,<span class="current-time"> 13:00</span>
+        </p>
+        <div class="weather-mi-description">
+          <p class="description">
+            <i class="fa-solid fa-cloud"></i>&nbsp;&nbsp;&nbsp;&nbsp;Clouds
+          </p>
+          <p class="rain-chance">
+            <i class="fa-solid fa-umbrella"></i>&nbsp;&nbsp;&nbsp;&nbsp;Rain -
+            30%
+          </p>
         </div>
-        <div class="error-block" id="notfound">
-            <p>Weather at the current location not found! <br> Try again</p>
-            <img src="https://cdn-icons-png.flaticon.com/512/6665/6665325.png" alt="">
+        <div class="weather-mi-location">
+          <i class="bi bi-geo-alt-fill"></i>
+          <p class="location-name">Kiev</p>
         </div>
-        <div class="error-block" id="nothing">
-            <p>Search weather at need location and get latest data about it!</p>
-            <img src="https://cdn-icons-png.flaticon.com/512/4652/4652346.png" alt="">
+        <div class="weather-mi-footer">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/330/330459.png"
+            alt=""
+          />
+          <button class="save-button" title="Save location">
+            <i class="bi bi-bookmarks"></i>
+          </button>
+          <button class="star-button" title="Set location as Favorite">
+            <i class="bi bi-star"></i>
+          </button>
         </div>
+      </div>
+      <div class="error-block" id="notfound">
+        <p>
+          Weather at the current location not found! <br />
+          Try again
+        </p>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/6665/6665325.png"
+          alt=""
+        />
+      </div>
+      <div class="error-block" id="nothing">
+        <p>Search weather at need location and get latest data about it!</p>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/4652/4652346.png"
+          alt=""
+        />
+      </div>
     </aside>
     <div class="container">
-        <header class="header">
-            <button class="header-menu-btn main-menu-btn" id="current-page"><i class="bi bi-calendar-day"></i>Today</button>
-            <button class="header-menu-btn history-menu-btn"><i class="bi bi-clock-history"></i>History</button>
-            <div class="temperature-type-block">
-                <button class="temperature-type-btn" id="current-temp-type">°C</button>
-                <button class="temperature-type-btn">°F</button>
+      <header class="header">
+        <button class="header-menu-btn main-menu-btn" id="current-page">
+          <i class="bi bi-calendar-day"></i>Today
+        </button>
+        <button class="header-menu-btn history-menu-btn">
+          <i class="bi bi-clock-history"></i>History
+        </button>
+        <div class="temperature-type-block">
+          <button class="temperature-type-btn" id="current-temp-type">
+            °C
+          </button>
+          <button class="temperature-type-btn">°F</button>
+        </div>
+        <div class="logo-block">
+          <div class="logo-block-title">
+            <p>Weath.io</p>
+            <span class="today-date">by Stuxlut</span>
+          </div>
+          <img src="img/logo.png" alt="" />
+        </div>
+      </header>
+      <section class="info-block">
+        <div class="saved-locations-block">
+          <p class="subtitle" id="saved-locations-title">
+            <i class="bi bi-bookmarks-fill"></i>&nbsp;&nbsp;&nbsp;Saved
+            Locations <span>(Count: 0 / 6)</span>
+          </p>
+          <div class="saved-locations-items">
+            <div class="saved-locations-item" id="saved-location-none">
+              <p class="saved-locations-name">None</p>
+              <i class="bi bi-plus-square"></i>
+              <button class="saved-location-search" style="display: none">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
             </div>
-             <div class="logo-block">
-                <div class="logo-block-title">
-                    <p>Weath.io</p>
-                    <span class="today-date">by Stuxlut</span>
-                </div>
-                <img src="img/logo.png" alt="">
-            </div>
-        </header>
-        <section class="info-block">
-            <div class="saved-locations-block">
-                <p class="subtitle" id="saved-locations-title"><i class="bi bi-bookmarks-fill"></i>&nbsp;&nbsp;&nbsp;Saved Locations <span>(Count: 0 / 6)</span></p>
-                <div class="saved-locations-items">
-                    <div class="saved-locations-item" id="saved-location-none">
-                        <p class="saved-locations-name">None</p>
-                        <i class="bi bi-plus-square"></i>
-                        <button class="saved-location-search" style="display: none"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </div>
-                    <!-- <div class="saved-locations-item">
+            <!-- <div class="saved-locations-item">
                         <p class="saved-locations-name">Kiev</p>
                         <img src="https://cdn-icons-png.flaticon.com/512/299/299803.png" alt="Flag">
                         <div class="saved-locations-buttons">
@@ -81,105 +124,168 @@
                             <button class="saved-location-delete"><i class="fa-solid fa-trash"></i></button>
                         </div>
                     </div> -->
+          </div>
+        </div>
+        <div class="weather-highlights-container">
+          <div class="weather-starred-location">
+            <p class="subtitle">
+              <i class="bi bi-star-fill"></i>&nbsp;&nbsp;&nbsp;Favorite Location
+            </p>
+            <div class="starred-location-block">
+              <div class="starred-location-nothing">
+                <i class="bi bi-star"></i>
+                <p>Nothing here</p>
+              </div>
+              <div class="starred-location">
+                <div class="starred-location-name-block">
+                  <img
+                    src="https://flagsapi.com/US/flat/64.png"
+                    alt="Flag"
+                    class="starred-location-img"
+                  />
+                  <p class="starred-location-name">Location</p>
                 </div>
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/4064/4064276.png"
+                  alt="Weather icon"
+                  class="starred-location-weather-img"
+                />
+                <div class="starred-location-info-block">
+                  <p class="starred-location-temperature">15<span>°C</span></p>
+                  <p class="starred-location-description">
+                    <i class="fa-solid fa-cloud"></i
+                    >&nbsp;&nbsp;&nbsp;&nbsp;Clouds
+                  </p>
+                </div>
+                <div class="starred-location-buttons">
+                  <button class="search-starred-location-btn">
+                    <i class="bi bi-search"></i>
+                  </button>
+                  <button class="remove-starred-location-btn">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="weather-highlights-container">
-                <div class="weather-starred-location">
-                    <p class="subtitle"><i class="bi bi-star-fill"></i>&nbsp;&nbsp;&nbsp;Favorite Location</p>
-                    <div class="starred-location-block">
-                        <div class="starred-location-nothing">
-                            <i class="bi bi-star"></i>
-                            <p>Nothing here</p>
-                        </div>
-                        <div class="starred-location">
-                            <div class="starred-location-name-block">
-                                <img src="https://flagsapi.com/US/flat/64.png" alt="Flag" class="starred-location-img">
-                                <p class="starred-location-name">Location</p>
-                            </div>
-                            <img src="https://cdn-icons-png.flaticon.com/512/4064/4064276.png" alt="Weather icon" class="starred-location-weather-img">
-                            <div class="starred-location-info-block">
-                                <p class="starred-location-temperature">15<span>°C</span></p>
-                                <p class="starred-location-description"><i class="fa-solid fa-cloud"></i>&nbsp;&nbsp;&nbsp;&nbsp;Clouds</p>
-                            </div>
-                            <div class="starred-location-buttons">
-                                <button class="search-starred-location-btn"><i class="bi bi-search"></i></button>
-                                <button class="remove-starred-location-btn"><i class="bi bi-trash"></i></button>
-                            </div>
-                        </div>
-                    </div>
+          </div>
+          <div class="weather-highlights-block">
+            <p class="subtitle highlights-subtitle">
+              <i class="bi bi-grid-1x2-fill"></i>&nbsp;&nbsp;&nbsp;Today's
+              Highlights
+            </p>
+            <div class="highlights-items">
+              <div class="highlights-items-container">
+                <div class="highlights-item" id="height-two-els">
+                  <div class="highlights-item-part">
+                    <p class="highlights-item-title">Humidity</p>
+                    <p class="highlights-item-text" id="humidity">
+                      - <span>%</span>
+                    </p>
+                    <!-- <p class="status">High&nbsp;</p> -->
+                  </div>
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/4005/4005831.png"
+                    alt=""
+                  />
+                  <button class="copyButton humidityItem">
+                    <i class="bi bi-clipboard-fill"></i>
+                  </button>
                 </div>
-                <div class="weather-highlights-block">
-                    <p class="subtitle highlights-subtitle"><i class="bi bi-grid-1x2-fill"></i>&nbsp;&nbsp;&nbsp;Today's Highlights</p>
-                    <div class="highlights-items">
-                        <div class="highlights-items-container">
-                            <div class="highlights-item" id="height-two-els">
-                                <div class="highlights-item-part">
-                                    <p class="highlights-item-title">Humidity</p>
-                                    <p class="highlights-item-text" id="humidity">- <span>%</span></p>
-                                    <!-- <p class="status">High&nbsp;</p> -->
-                                </div>
-                                <img src="https://cdn-icons-png.flaticon.com/512/4005/4005831.png" alt="">
-                                <button class="copyButton humidityItem"><i class="bi bi-clipboard-fill"></i></button>
-                            </div>
-                            <div class="highlights-item" id="height-two-els">
-                                <div class="highlights-item-part">
-                                    <p class="highlights-item-title">Wind Speed</p>
-                                    <p class="highlights-item-text" id="windspeed">- <span>km/h</span></p>
-                                    <!-- <p class="status">High&nbsp;</p> -->
-                                </div>
-                                <img src="https://cdn-icons-png.flaticon.com/512/4005/4005828.png" alt="">
-                                <button class="copyButton windspeedItem"><i class="bi bi-clipboard-fill"></i></button>
-                            </div>
-                        </div>
-                        <div class="highlights-items-container">
-                            <div class="highlights-item" id="height-one-el">
-                                <div class="highlights-item-part">
-                                    <p class="highlights-item-title">Air Quality</p>
-                                    <p class="highlights-item-text">-</p>
-                                    <p class="status">Moderate&nbsp;</p>
-                                </div>
-                                <img src="https://cdn-icons-png.flaticon.com/512/5029/5029184.png" alt="">
-                                <button class="copyButton"><i class="bi bi-clipboard-fill"></i></button>
-                            </div>
-                        </div>
-                        <div class="highlights-items-container">
-                            <div class="highlights-item" id="height-two-els">
-                                <div class="highlights-item-part">
-                                    <p class="highlights-item-title">Visibility</p>
-                                    <p class="highlights-item-text" id="visibility">- <span>km</span></p>
-                                </div>
-                                <img src="https://cdn-icons-png.flaticon.com/512/4005/4005908.png" alt="">
-                                <button class="copyButton visibilityItem"><i class="bi bi-clipboard-fill"></i></button>
-                            </div>
-                            <div class="highlights-item" id="height-two-els">
-                                <div class="highlights-item-part">
-                                    <p class="highlights-item-title">Cloudiness</p>
-                                    <p class="highlights-item-text" id="cloudiness">- <span>%</span></p>
-                                </div>
-                                <img src="https://cdn-icons-png.flaticon.com/512/4005/4005883.png" alt="">
-                                <button class="copyButton cloudinessItem"><i class="bi bi-clipboard-fill"></i></button>
-                            </div>
-                        </div>
-                        <div class="highlights-items-container">
-                            <div class="highlights-item" id="height-one-el">
-                                <div class="highlights-item-part">
-                                    <p class="highlights-item-title">Pressure</p>
-                                    <p class="highlights-item-text" id="pressure">- <span>hPa</span></p>
-                                    <p class="status">Good&nbsp;</p>
-                                </div>
-                                <img src="https://cdn-icons-png.flaticon.com/512/4005/4005925.png" alt="">
-                                <button class="copyButton pressureItem"><i class="bi bi-clipboard-fill"></i></button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="highlights-item" id="height-two-els">
+                  <div class="highlights-item-part">
+                    <p class="highlights-item-title">Wind Speed</p>
+                    <p class="highlights-item-text" id="windspeed">
+                      - <span>km/h</span>
+                    </p>
+                    <!-- <p class="status">High&nbsp;</p> -->
+                  </div>
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/4005/4005828.png"
+                    alt=""
+                  />
+                  <button class="copyButton windspeedItem">
+                    <i class="bi bi-clipboard-fill"></i>
+                  </button>
                 </div>
+              </div>
+              <div class="highlights-items-container">
+                <div class="highlights-item" id="height-one-el">
+                  <div class="highlights-item-part">
+                    <p class="highlights-item-title">Air Quality</p>
+                    <p class="highlights-item-text">-</p>
+                    <p class="status">Moderate&nbsp;</p>
+                  </div>
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/5029/5029184.png"
+                    alt=""
+                  />
+                  <button class="copyButton">
+                    <i class="bi bi-clipboard-fill"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="highlights-items-container">
+                <div class="highlights-item" id="height-two-els">
+                  <div class="highlights-item-part">
+                    <p class="highlights-item-title">Visibility</p>
+                    <p class="highlights-item-text" id="visibility">
+                      - <span>km</span>
+                    </p>
+                  </div>
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/4005/4005908.png"
+                    alt=""
+                  />
+                  <button class="copyButton visibilityItem">
+                    <i class="bi bi-clipboard-fill"></i>
+                  </button>
+                </div>
+                <div class="highlights-item" id="height-two-els">
+                  <div class="highlights-item-part">
+                    <p class="highlights-item-title">Cloudiness</p>
+                    <p class="highlights-item-text" id="cloudiness">
+                      - <span>%</span>
+                    </p>
+                  </div>
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/4005/4005883.png"
+                    alt=""
+                  />
+                  <button class="copyButton cloudinessItem">
+                    <i class="bi bi-clipboard-fill"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="highlights-items-container">
+                <div class="highlights-item" id="height-one-el">
+                  <div class="highlights-item-part">
+                    <p class="highlights-item-title">Pressure</p>
+                    <p class="highlights-item-text" id="pressure">
+                      - <span>hPa</span>
+                    </p>
+                    <p class="status">Good&nbsp;</p>
+                  </div>
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/4005/4005925.png"
+                    alt=""
+                  />
+                  <button class="copyButton pressureItem">
+                    <i class="bi bi-clipboard-fill"></i>
+                  </button>
+                </div>
+              </div>
             </div>
-        </section>
-        <section class="history-block">
-            <div class="history-list-block">
-                <p class="subtitle"><i class="bi bi-clock-fill"></i>&nbsp;&nbsp;&nbsp;Search History <span>(Max: 10)</span></p>
-                <div class="history-items">
-                    <!-- <div class="history-item">
+          </div>
+        </div>
+      </section>
+      <section class="history-block">
+        <div class="history-list-block">
+          <p class="subtitle">
+            <i class="bi bi-clock-fill"></i>&nbsp;&nbsp;&nbsp;Search History
+            <span>(Max: 10)</span>
+          </p>
+          <div class="history-items">
+            <!-- <div class="history-item">
                         <p class="history-time">13:30</p>
                         <div class="history-location">
                             <p class="history-location-name">Location name</p>
@@ -187,21 +293,23 @@
                         </div>
                         <button class="history-search-btn"><i class="bi bi-search"></i></button>
                     </div> -->
-                </div>
-                <div class="history-nothing-block">
-                    <div class="history-nothing-item">
-                        <i class="bi bi-clock-history"></i>
-                        <p>Nothing here</p>
-                    </div>
-                </div>
+          </div>
+          <div class="history-nothing-block">
+            <div class="history-nothing-item">
+              <i class="bi bi-clock-history"></i>
+              <p>Nothing here</p>
             </div>
-            <div class="clear-history-block">
-                <button class="clear-history-btn"><i class="bi bi-trash"></i>Clear history</button>
-            </div>
-        </section>
+          </div>
+        </div>
+        <div class="clear-history-block">
+          <button class="clear-history-btn">
+            <i class="bi bi-trash"></i>Clear history
+          </button>
+        </div>
+      </section>
     </div>
     <div class="toast-container">
-        <!-- <div class="toast-item">
+      <!-- <div class="toast-item">
             <i class="bi bi-check-circle-fill"></i>
             <div class="toast-message-block">
                 <p class="toast-message">Success</p>
@@ -218,9 +326,12 @@
     <!-- Sugar.js library -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/sugar@2.0.6/index.min.js"></script> -->
     <!-- JQuery library -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"
+      integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+      crossorigin="anonymous"
+    ></script>
     <!-- Main script -->
     <script src="js/script.js"></script>
-</body>
-
+  </body>
 </html>
